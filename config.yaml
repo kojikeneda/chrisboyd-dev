@@ -16,9 +16,9 @@ menu:
       name: About
       url: /about/
       weight: 10
-    - identifier: work
-      name: Work Experience
-      url: /work/
+    - identifier: Portfolio
+      name: portfolio
+      url: /portfolio/
       weight: 20
     - identifier: posts
       name: Blog
