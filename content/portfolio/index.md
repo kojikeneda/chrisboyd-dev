@@ -2,6 +2,10 @@
 
 **Moogsoft / Head of Engineering**
 
+### How to Read This Section
+
+This section is an in-depth historical record of key projects and initiatives, organized by the companies where they were executed. Recruiters and hiring managers are encouraged to use it as a supplementary resource that provides detailed context beyond a traditional resume. It highlights the strategic impact, technical challenges, and innovative solutions delivered throughout my career. By reviewing each project entry—including overviews, key achievements, and technology stacks—you gain insight into how I have driven operational excellence and transformational growth in high-stakes environments. This comprehensive narrative demonstrates not only my technical expertise but also my leadership and ability to execute complex, cross-functional initiatives.
+
 **Moogsoft Logo**
 
 **Duration:** 5 years
