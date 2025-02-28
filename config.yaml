@@ -12,18 +12,22 @@ enableGitInfo: false
 # Menu items
 menu:
   main:
-    - identifier: posts
-      name: Posts
-      url: /posts/
-      weight: 10
     - identifier: about
       name: About
       url: /about/
+      weight: 10
+    - identifier: work
+      name: Work Experience
+      url: /work/
       weight: 20
-    - identifier: tags
-      name: Tags
-      url: /tags/
+    - identifier: posts
+      name: Blog
+      url: /posts/
       weight: 30
+    - identifier: contact
+      name: Contact
+      url: /contact/
+      weight: 40
 
 params:
   defaultTheme: auto

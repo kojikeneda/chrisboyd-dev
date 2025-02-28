@@ -5,11 +5,14 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>404 Page not found | Chris Boyd&#39;s Blog</title>
-<meta name="keywords" content="">
-<meta name="description" content="Personal blog of Chris Boyd - Software Developer and Technology Enthusiast">
+<title>Enterprise SaaS Security for Regulated Industries | Chris Boyd&#39;s Blog</title>
+<meta name="keywords" content="security, enterprise, saas, regulated-industries">
+<meta name="description" content="Enterprise SaaS Processes &amp; Platform Capabilities for Regulated Industries
+Overview
+At Moogsoft, I led the implementation of comprehensive security features including SSO Integration (OIDC, SAML), RBAC, Custom Roles, and Proxy Collector Support. We completely rewrote all security procedures and controls for SOC II and related audit requirements and implemented a new customer trust portal for questionnaire automation.
+These changes included updates to our WAF implementation to block known bad vectors and align with standards like OWASP top 10, as well as product improvements giving users more control over their authentication configuration.">
 <meta name="author" content="">
-<link rel="canonical" href="http://localhost:1313/404.html">
+<link rel="canonical" href="http://localhost:1313/posts/enterprise-saas-security/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
 <link rel="icon" href="http://localhost:1313/favicon.ico">
 <link rel="icon" type="image/png" sizes="16x16" href="http://localhost:1313/favicon-16x16.png">
@@ -18,7 +21,7 @@
 <link rel="mask-icon" href="http://localhost:1313/safari-pinned-tab.svg">
 <meta name="theme-color" content="#2e2e33">
 <meta name="msapplication-TileColor" content="#2e2e33">
-<link rel="alternate" hreflang="en" href="http://localhost:1313/404.html">
+<link rel="alternate" hreflang="en" href="http://localhost:1313/posts/enterprise-saas-security/">
 <noscript>
     <style>
         #theme-toggle,
@@ -58,7 +61,7 @@
 </noscript>
 </head>
 
-<body class="list" id="top">
+<body class="" id="top">
 <script>
     if (localStorage.getItem("pref-theme") === "dark") {
         document.body.classList.add('dark');
@@ -122,7 +125,60 @@
     </nav>
 </header>
 <main class="main">
-<div class="not-found">404</div>
+
+<article class="post-single">
+  <header class="post-header">
+    <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
+    <h1 class="post-title entry-hint-parent">
+      Enterprise SaaS Security for Regulated Industries
+    </h1>
+    <div class="post-meta"><span title='2022-01-15 00:00:00 +0000 UTC'>January 15, 2022</span>&nbsp;·&nbsp;2 min
+
+</div>
+  </header> 
+  <div class="post-content"><h1 id="enterprise-saas-processes--platform-capabilities-for-regulated-industries">Enterprise SaaS Processes &amp; Platform Capabilities for Regulated Industries<a hidden class="anchor" aria-hidden="true" href="#enterprise-saas-processes--platform-capabilities-for-regulated-industries">#</a></h1>
+<h2 id="overview">Overview<a hidden class="anchor" aria-hidden="true" href="#overview">#</a></h2>
+<p>At Moogsoft, I led the implementation of comprehensive security features including SSO Integration (OIDC, SAML), RBAC, Custom Roles, and Proxy Collector Support. We completely rewrote all security procedures and controls for SOC II and related audit requirements and implemented a new customer trust portal for questionnaire automation.</p>
+<p>These changes included updates to our WAF implementation to block known bad vectors and align with standards like OWASP top 10, as well as product improvements giving users more control over their authentication configuration.</p>
+<h2 id="impact">Impact<a hidden class="anchor" aria-hidden="true" href="#impact">#</a></h2>
+<p>For the first time in company history, a SOC audit came back with zero material findings after our full rewrite of security procedures, protocols, and standards. This drastically increased customer confidence in our product and platform, unblocking several pending deals totaling approximately $1.5 million in recurring revenue.</p>
+<h2 id="technical-implementation">Technical Implementation<a hidden class="anchor" aria-hidden="true" href="#technical-implementation">#</a></h2>
+<p>We leveraged a modern cloud-native stack including:</p>
+<ul>
+<li>AWS EKS for container orchestration</li>
+<li>AWS OpenSearch for log analysis</li>
+<li>AWS Aurora MySQL for relational data</li>
+<li>Cloudflare for DNS, Workers, CDN &amp; WAF</li>
+<li>Java and Vue.js for application development</li>
+<li>Kafka for event streaming</li>
+<li>MongoDB for document storage</li>
+<li>Thanos for metrics</li>
+<li>Auth0 for identity management</li>
+<li>Ambassador EDGE Stack for API gateway</li>
+</ul>
+<h2 id="lessons-learned">Lessons Learned<a hidden class="anchor" aria-hidden="true" href="#lessons-learned">#</a></h2>
+<p>This project taught me valuable lessons about balancing security requirements with user experience, and how proper security implementation can actually be a business enabler rather than just a cost center.</p>
+
+
+  </div>
+
+  <footer class="post-footer">
+    <ul class="post-tags">
+      <li><a href="http://localhost:1313/tags/security/">Security</a></li>
+      <li><a href="http://localhost:1313/tags/enterprise/">Enterprise</a></li>
+      <li><a href="http://localhost:1313/tags/saas/">Saas</a></li>
+      <li><a href="http://localhost:1313/tags/regulated-industries/">Regulated-Industries</a></li>
+    </ul>
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/hello-world/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>Hello World</span>
+  </a>
+</nav>
+
+  </footer>
+</article>
     </main>
     
 <footer class="footer">
@@ -193,6 +249,53 @@
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 
