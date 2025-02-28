@@ -6,7 +6,6 @@ draft: false
 
 # Chris Boyd
 
-Passionate and versatile engineer leader with proven success in SaaS products, Platform Engineering, and Product Development
 
 ## Intro
 
