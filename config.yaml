@@ -62,8 +62,8 @@ params:
   # Social icons
   socialIcons:
     - name: github
-      url: "https://github.com/yourusername"
+      url: "https://github.com/kojikeneda"
     - name: linkedin
-      url: "https://linkedin.com/in/yourusername"
+      url: "https://www.linkedin.com/in/chris-boyd-365b2220/"
     - name: email
-      url: "mailto:your@email.com"
+      url: "mailto:chrisdboyd@gmail.com"
