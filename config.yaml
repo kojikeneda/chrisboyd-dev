@@ -1,0 +1,65 @@
+baseURL: "https://chrisboyd.dev/"
+title: "Chris Boyd's Blog"
+languageCode: "en-us"
+theme: "PaperMod"
+
+# Enable emoji support
+enableEmoji: true
+
+# Enable Git info for better last modified dates
+enableGitInfo: false
+
+# Menu items
+menu:
+  main:
+    - identifier: posts
+      name: Posts
+      url: /posts/
+      weight: 10
+    - identifier: about
+      name: About
+      url: /about/
+      weight: 20
+    - identifier: tags
+      name: Tags
+      url: /tags/
+      weight: 30
+
+params:
+  defaultTheme: auto
+  
+  # Site description
+  description: "Personal blog of Chris Boyd - Software Developer and Technology Enthusiast"
+  
+  # Show reading time on posts
+  ShowReadingTime: true
+  
+  # Show breadcrumbs navigation
+  ShowBreadCrumbs: true
+  
+  # Show post navigation (next/prev)
+  ShowPostNavLinks: true
+  
+  # Show code copy buttons
+  ShowCodeCopyButtons: true
+  
+  # Enable search functionality
+  enableSearch: true
+  
+  # Home page settings
+  homeInfoParams:
+    Title: "Welcome to My Blog"
+    Content: >
+      Hi there! I'm Chris Boyd, a software developer passionate about technology.
+      
+      - This is my personal blog where I share my thoughts, projects, and experiences.
+      - Feel free to explore my posts and reach out if you have any questions!
+  
+  # Social icons
+  socialIcons:
+    - name: github
+      url: "https://github.com/yourusername"
+    - name: linkedin
+      url: "https://linkedin.com/in/yourusername"
+    - name: email
+      url: "mailto:your@email.com"

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Chris Boyd&#39;s Blog</title>
+    <link>http://localhost:1313/</link>
+    <description>Recent content on Chris Boyd&#39;s Blog</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 01 Jan 2023 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>About Me</title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;h1 id=&#34;hello-im-chris-boyd&#34;&gt;Hello, I&amp;rsquo;m Chris Boyd&lt;/h1&gt;
+&lt;p&gt;I&amp;rsquo;m a software developer and technology enthusiast. This is my personal blog where I share my thoughts, projects, and experiences.&lt;/p&gt;
+&lt;h2 id=&#34;my-background&#34;&gt;My Background&lt;/h2&gt;
+&lt;p&gt;(Add your background information here)&lt;/p&gt;
+&lt;h2 id=&#34;skills&#34;&gt;Skills&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Skill 1&lt;/li&gt;
+&lt;li&gt;Skill 2&lt;/li&gt;
+&lt;li&gt;Skill 3&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;contact&#34;&gt;Contact&lt;/h2&gt;
+&lt;p&gt;Feel free to reach out to me at &lt;a href=&#34;mailto:your@email.com&#34;&gt;your@email.com&lt;/a&gt; or connect with me on &lt;a href=&#34;https://github.com/yourusername&#34;&gt;GitHub&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Hello World</title>
+      <link>http://localhost:1313/posts/hello-world/</link>
+      <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/hello-world/</guid>
+      <description>&lt;h1 id=&#34;hello-world&#34;&gt;Hello World!&lt;/h1&gt;
+&lt;p&gt;This is my first blog post. I&amp;rsquo;m excited to start sharing my thoughts and experiences here.&lt;/p&gt;
+&lt;h2 id=&#34;what-to-expect&#34;&gt;What to Expect&lt;/h2&gt;
+&lt;p&gt;In this blog, I&amp;rsquo;ll be writing about:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Technology trends&lt;/li&gt;
+&lt;li&gt;Software development&lt;/li&gt;
+&lt;li&gt;Personal projects&lt;/li&gt;
+&lt;li&gt;And more!&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Stay tuned for more content coming soon!&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
