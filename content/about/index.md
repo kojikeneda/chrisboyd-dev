@@ -1,36 +1,19 @@
----
-title: "About Me"
-date: 2023-01-01
-draft: false
----
+# About Me
 
-# Chris Boyd
+I’m an engineering executive passionate about turning operational data into actionable insights that drive innovation, reliability, and growth. With a career that spans leadership roles at GoDaddy, Moogsoft, and Vultr, I’ve witnessed firsthand how a robust observability strategy not only enhances system performance but also empowers the teams behind it.
 
+## My Journey
 
-## Intro
+Starting my career at GoDaddy, I helped modernize observability and monitoring systems—cutting detection and resolution times significantly while laying the foundation for a culture of continuous improvement. At Moogsoft, I led the transformation of our platform with AI-powered incident management tools, fueling multi-million ARR growth and streamlining operations for enterprise clients. More recently, at Vultr, I spearheaded initiatives that integrated AI and machine learning into monitoring frameworks, optimizing cloud performance and reducing costs on a global scale.
 
-![Moogsoft Logo](/images/moogsoft-logo.png)
+## Philosophy & Vision
 
-I'm drawn to the observability space. For me, it's not just about understanding and monitoring systems; it's about having a genuine, positive impact on the lives of fellow engineers. I also believe in building solutions that ensure the seamless availability of services and enhance the quality of the customer experience. The amount of insight and understanding we can give our engineers greatly impacts their ability to have success. Once I saw this unfold originally started aligning technical precision with empathy and I intend to carry that lesson forward through my future roles.
+For me, observability is more than just system monitoring—it’s about marrying technical precision with empathetic leadership. I believe that equipping engineers with deep insights and the right tools is essential for unlocking their full potential. My guiding principle is simple: **“Do what you say you’re going to do, even when it’s inconvenient.”** This mindset has helped me mentor emerging leaders and drive projects that balance business objectives with operational excellence.
 
-My vision for the future is clear: mentoring the next generation of technical leaders at top-tier tech companies, diving deeper into the integration of Machine Learning into all aspects of life, and establishing my own micro-SaaS venture. I see these goals not just as milestones but as avenues to continuously expand my horizons and contribute more profoundly to the world.
+Looking forward, I’m excited to explore new frontiers in AI/ML integration, automation-first DevOps, and scalable cloud architectures—always with the goal of enhancing service availability and customer experience while nurturing the talent that makes it all possible.
 
-One of my strengths is the ability to bridge the technical and business worlds. This skill allows me to anticipate business trajectories and align them seamlessly with technical innovations. I take pride in my servant leadership approach, actively nurturing individual contributors and emerging leaders. By systemizing processes and championing transparency, I aim to create an environment where decision-making is enhanced and excellence is the standard.
+## Let’s Connect
 
-Grounded in values, I firmly believe in the principle: "Do what you say you're going to do, even when it's inconvenient." Leadership, for me, is about taking the initiative even in the absence of direction. My journey has been enriched by inspirations from the open-source community, industry stalwarts like Jason Kalich and Arne Josefsberg, Phil Tee and insightful reads such as "Good to Great" and "Turn This Ship Around".
+I’m always eager to discuss the future of observability, innovative cloud solutions, or leadership in technology. Feel free to reach out via [email](mailto:chrisdboyd@gmail.com), check out my work on [GitHub](https://github.com/kojikeneda), or connect with me on [LinkedIn](https://www.linkedin.com/in/chris-boyd-365b2220/).
 
-As I continue on this path, I'm committed to pushing the boundaries of what's possible in the observability space, always seeking to blend innovation with empathy.
-
-## My Background
-
-(Add your background information here)
-
-## Skills
-
-- Skill 1
-- Skill 2
-- Skill 3
-
-## Contact
-
-Feel free to reach out to me at [your@email.com](mailto:your@email.com) or connect with me on [GitHub](https://github.com/yourusername).
+© 2025 Chris Boyd's Blog · Powered by Hugo & PaperMod

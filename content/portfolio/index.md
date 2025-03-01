@@ -42,14 +42,14 @@ Oversaw all Product, Platform, Enablement and Development at Moogsoft with the e
 - IT Manager to Director of IT/SecOps
 
 **Architecture:**  
-Moogsoft Logo
+![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg)
 
 **Projects:**
 
 ### Enterprise SaaS Processes & Platform Capabilities for Regulated Industries
 
 **Overview:**  
-SSO Integration (OIDC, SAML), RBAC, Custom Roles, Proxy Collector Support. Rewrote all security procedures and controls for SOC II and related audit requirements, implemented a new customer trust portal for questionnaire automation. Included in the changes supporting this was a series of changes to the WAF implementation to block known bad vectors and aligning with standards like OWASP top 10 and product improvements giving users more control over their authentication configuration. These platform improvements and process improvements aided Moogsoft's push into the highly regulated financial sector which supported record quarters back to back in 2022.
+SSO Integration (OIDC, SAML), RBAC, Custom Roles, Proxy Collector Support. Rewritten all security procedures and controls for SOC II and related audit requirements, implemented a new customer trust portal for questionnaire automation. Included in the changes supporting this was a series of changes to the WAF implementation to block known bad vectors and aligning with standards like OWASP top 10 and product improvements giving users more control over their authentication configuration. These platform improvements and process improvements aided Moogsoft's push into the highly regulated financial sector which supported record quarters back to back in 2022.
 
 **Impact:**  
 For the first time in company history a SOC audit came back with zero material findings after a full rewrite of security procedures, protocols and standards was completed. This drastically increased customer confidence in the product and platform and unblocked several pending deals to move forward totaling ~1.5 MM in recurring revenue.
@@ -75,7 +75,7 @@ These features drove strong sales conversion in Q2 and Q3 where we remained abov
 Quarkus Java, Vue, Aurora MySQL
 
 **Visuals:**  
-Moogsoft situation room for working incidents, Moogsoft Logo, Moogsoft Logo
+Moogsoft situation room for working incidents, ![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg), ![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg)
 
 ---
 
@@ -104,7 +104,7 @@ The new capability allowed customers to fine tune anomaly detection with a dynam
 Thanos, MongoDB, PromLens, Prometheus-Proxy
 
 **Visuals:**  
-Moogsoft Logo
+![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg)
 
 ---
 
@@ -158,7 +158,7 @@ The initial prototype observability agent for the SaaS product was written in Ja
 Aligning with Rust and selecting Vector as the framework allowed us to deliver numerous capabilities for customers and provided them with a reliable platform we were building on. This allowed customers to take on more complex integrations and deployment models to meet their needs for a local installation of our agent.
 
 **Visuals:**  
-UI controls for agents deployed globally
+UI controls for agents deployed globally, ![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg)
 
 ---
 
@@ -174,7 +174,7 @@ Landed several pending deals and provided an alternative for existing customers 
 Looker, Snowflake, Kafka Streams
 
 **Visuals:**  
-UI controls for agents deployed globally
+UI controls for agents deployed globally, ![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg)
 
 ---
 
@@ -243,7 +243,7 @@ Allowed for reporting, analysis and better understanding by the field and suppor
 Rhino Javascript engine, Java, RabbitMQ, MySQL, Nginx, Tomcat
 
 **Visuals:**  
-UI controls for agents deployed globally
+UI controls for agents deployed globally, ![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg)
 
 ---
 
