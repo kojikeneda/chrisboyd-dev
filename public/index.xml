@@ -9,17 +9,6 @@
     <lastBuildDate>Sun, 01 Jan 2023 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>About Me</title>
-      <link>http://localhost:1313/about/</link>
-      <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/about/</guid>
-      <description>&lt;h1 id=&#34;chris-boyd&#34;&gt;Chris Boyd&lt;/h1&gt;
-&lt;p&gt;Passionate and versatile engineer leader with proven success in SaaS products, Platform Engineering, and Product Development&lt;/p&gt;
-&lt;h2 id=&#34;intro&#34;&gt;Intro&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;Moogsoft Logo&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/moogsoft-logo.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m drawn to the observability space. For me, it&amp;rsquo;s not just about understanding and monitoring systems; it&amp;rsquo;s about having a genuine, positive impact on the lives of fellow engineers. I also believe in building solutions that ensure the seamless availability of services and enhance the quality of the customer experience. The amount of insight and understanding we can give our engineers greatly impacts their ability to have success. Once I saw this unfold originally started aligning technical precision with empathy and I intend to carry that lesson forward through my future roles.&lt;/p&gt;</description>
-    </item>
-    <item>
       <title>Contact</title>
       <link>http://localhost:1313/contact/</link>
       <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
@@ -57,25 +46,25 @@
 &lt;p&gt;Stay tuned for more content coming soon!&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Work Experience</title>
-      <link>http://localhost:1313/portfolio/</link>
-      <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/portfolio/</guid>
-      <description>&lt;h1 id=&#34;professional-experience&#34;&gt;Professional Experience&lt;/h1&gt;
-&lt;h2 id=&#34;moogsoft--head-of-engineering&#34;&gt;Moogsoft / Head of Engineering&lt;/h2&gt;
-&lt;p&gt;&lt;img alt=&#34;Moogsoft Logo&#34; loading=&#34;lazy&#34; src=&#34;http://localhost:1313/images/moogsoft-logo.png&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;Duration:&lt;/strong&gt; 5 years&lt;br&gt;
-&lt;strong&gt;Brief Description:&lt;/strong&gt; Moogsoft is a technology company specializing in artificial intelligence for IT operations (AIOps). Founded in 2011, Moogsoft&amp;rsquo;s primary mission is to help large-scale IT departments automate their most challenging tasks by using machine learning and data science. Their platform aims to reduce the noise in IT alerts, streamline incident management, and facilitate collaboration among IT teams. By leveraging AI, the company assists organizations in ensuring that their IT infrastructures remain robust and efficient. Throughout the duration of my various roles at Moogsoft my focus was on easing delivery challenges, posturing us to be a SaaS product led company and to keep the lights on for on prem customers who we continued to support with updates. Intent to acquire Moogsoft was announced by Dell Technologies in July of 2023 following my departure.&lt;/p&gt;</description>
+      <title></title>
+      <link>http://localhost:1313/about/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/about/</guid>
+      <description>&lt;h1 id=&#34;about-me&#34;&gt;About Me&lt;/h1&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;I’m an engineering executive passionate about turning operational data into actionable insights that drive innovation, reliability, and growth. With a career that spans leadership roles at GoDaddy, Moogsoft, and Vultr, I’ve witnessed firsthand how a robust observability strategy not only enhances system performance but also empowers the teams behind it.&lt;/p&gt;
+&lt;h2 id=&#34;my-journey&#34;&gt;My Journey&lt;/h2&gt;
+&lt;p&gt;Starting my career at GoDaddy, I helped modernize observability and monitoring systems—cutting detection and resolution times significantly while laying the foundation for a culture of continuous improvement. At Moogsoft, I led the transformation of our platform with AI-powered incident management tools, fueling multi-million ARR growth and streamlining operations for enterprise clients. More recently, at Vultr, I spearheaded initiatives that integrated AI and machine learning into monitoring frameworks, optimizing cloud performance and reducing costs on a global scale.&lt;/p&gt;</description>
     </item>
     <item>
-      <title>Enterprise SaaS Security for Regulated Industries</title>
-      <link>http://localhost:1313/posts/enterprise-saas-security/</link>
-      <pubDate>Sat, 15 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/enterprise-saas-security/</guid>
-      <description>&lt;h1 id=&#34;enterprise-saas-processes--platform-capabilities-for-regulated-industries&#34;&gt;Enterprise SaaS Processes &amp;amp; Platform Capabilities for Regulated Industries&lt;/h1&gt;
-&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
-&lt;p&gt;At Moogsoft, I led the implementation of comprehensive security features including SSO Integration (OIDC, SAML), RBAC, Custom Roles, and Proxy Collector Support. We completely rewrote all security procedures and controls for SOC II and related audit requirements and implemented a new customer trust portal for questionnaire automation.&lt;/p&gt;
-&lt;p&gt;These changes included updates to our WAF implementation to block known bad vectors and align with standards like OWASP top 10, as well as product improvements giving users more control over their authentication configuration.&lt;/p&gt;</description>
+      <title></title>
+      <link>http://localhost:1313/portfolio/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/portfolio/</guid>
+      <description>&lt;h1 id=&#34;company--role--project-structure&#34;&gt;Company / Role / Project Structure&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;Moogsoft / Head of Engineering&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;how-to-read-this-section&#34;&gt;How to Read This Section&lt;/h3&gt;
+&lt;p&gt;This section is an in-depth historical record of key projects and initiatives, organized by the companies where they were executed. Recruiters and hiring managers are encouraged to use it as a supplementary resource that provides detailed context beyond a traditional resume. It highlights the strategic impact, technical challenges, and innovative solutions delivered throughout my career. By reviewing each project entry—including overviews, key achievements, and technology stacks—you gain insight into how I have driven operational excellence and transformational growth in high-stakes environments. This comprehensive narrative demonstrates not only my technical expertise but also my leadership and ability to execute complex, cross-functional initiatives.&lt;/p&gt;</description>
     </item>
   </channel>
 </rss>

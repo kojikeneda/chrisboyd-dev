@@ -1,5 +1,9 @@
 # About Me
 
+<div style="text-align: center;">
+  <img src="/images/photo-037.jpg" alt="Chris Boyd" style="max-width: 200px; border-radius: 50%;">
+</div>
+
 I’m an engineering executive passionate about turning operational data into actionable insights that drive innovation, reliability, and growth. With a career that spans leadership roles at GoDaddy, Moogsoft, and Vultr, I’ve witnessed firsthand how a robust observability strategy not only enhances system performance but also empowers the teams behind it.
 
 ## My Journey

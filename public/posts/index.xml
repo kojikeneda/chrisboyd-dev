@@ -25,15 +25,5 @@
 &lt;/ol&gt;
 &lt;p&gt;Stay tuned for more content coming soon!&lt;/p&gt;</description>
     </item>
-    <item>
-      <title>Enterprise SaaS Security for Regulated Industries</title>
-      <link>http://localhost:1313/posts/enterprise-saas-security/</link>
-      <pubDate>Sat, 15 Jan 2022 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/enterprise-saas-security/</guid>
-      <description>&lt;h1 id=&#34;enterprise-saas-processes--platform-capabilities-for-regulated-industries&#34;&gt;Enterprise SaaS Processes &amp;amp; Platform Capabilities for Regulated Industries&lt;/h1&gt;
-&lt;h2 id=&#34;overview&#34;&gt;Overview&lt;/h2&gt;
-&lt;p&gt;At Moogsoft, I led the implementation of comprehensive security features including SSO Integration (OIDC, SAML), RBAC, Custom Roles, and Proxy Collector Support. We completely rewrote all security procedures and controls for SOC II and related audit requirements and implemented a new customer trust portal for questionnaire automation.&lt;/p&gt;
-&lt;p&gt;These changes included updates to our WAF implementation to block known bad vectors and align with standards like OWASP top 10, as well as product improvements giving users more control over their authentication configuration.&lt;/p&gt;</description>
-    </item>
   </channel>
 </rss>

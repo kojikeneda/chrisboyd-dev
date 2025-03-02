@@ -9,6 +9,12 @@ enableEmoji: true
 # Enable Git info for better last modified dates
 enableGitInfo: false
 
+# Enable html rendering
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+
 # Menu items
 menu:
   main:
