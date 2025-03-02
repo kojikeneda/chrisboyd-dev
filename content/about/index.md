@@ -1,7 +1,7 @@
 # About Me
 
 <div style="text-align: center;">
-  <img src="static/images/photo-037.jpg" alt="Chris Boyd" style="max-width: 200px; border-radius: 50%;">
+  <img src="/images/photo-037.jpg" alt="Chris Boyd" style="max-width: 200px; border-radius: 50%;">
 </div>
 
 I’m an engineering executive with a proven track record in turning visionary ideas into scalable, production-grade systems. My experience spans SRE, product management, and full-stack engineering—having led teams at GoDaddy, Moogsoft, and Vultr. I’ve built robust observability frameworks that drive actionable insights while also architecting and operating backend microservices using technologies like Quarkus. Notably, I led a critical migration from a legacy Java agent to a high-performance Rust-based solution, significantly enhancing performance and reducing system footprint. In essence, I combine hands-on technical expertise with strategic leadership to drive products from conception to large-scale operation.
