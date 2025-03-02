@@ -92,7 +92,7 @@ These features drove strong sales conversion in Q2 and Q3 where we remained abov
 Quarkus Java, Vue, Aurora MySQL
 
 **Visuals:**  
-Moogsoft situation room for working incidents, ![Situation Room 1](/images/OpenIncidentstoSitautionRoom.jpg) ![ituation Room 2](/images/SituationRoom.png) ![ituation Room 3](/images/situationroom01.png)
+Moogsoft situation room for working incidents, ![Situation Room 1](/images/OpenIncidentstoSitautionRoom.jpg) ![ituation Room 2](/images/SituationRoom.png) 
 
 ---
 
@@ -121,7 +121,9 @@ The new capability allowed customers to fine tune anomaly detection with a dynam
 Thanos, MongoDB, PromLens, Prometheus-Proxy
 
 **Visuals:**  
-![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg)
+![Timeseries 1](/timeseries/timeseries.jpg)
+![Timeseries 2](/timeseries/Z_FEATURE_1.jpg)
+
 
 ---
 
