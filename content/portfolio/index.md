@@ -4,7 +4,24 @@
 
 ### How to Read This Section
 
-This section is an in-depth historical record of key projects and initiatives, organized by the companies where they were executed. Recruiters and hiring managers are encouraged to use it as a supplementary resource that provides detailed context beyond a traditional resume. It highlights the strategic impact, technical challenges, and innovative solutions delivered throughout my career. By reviewing each project entry—including overviews, key achievements, and technology stacks—you gain insight into how I have driven operational excellence and transformational growth in high-stakes environments. This comprehensive narrative demonstrates not only my technical expertise but also my leadership and ability to execute complex, cross-functional initiatives.
+This section is an in-depth historical record of key projects and initiatives, organized by the companies where they were executed. Recruiters and hiring managers are encouraged to use it as a supplementary resource that provides detailed context beyond a traditional resume. It highlights the strategic impact, technical challenges, and innovative solutions delivered throughout my career. By reviewing each project entry—including overviews, key achievements, and technology stacks—you gain insight into how I have driven engineering excellence and transformational growth in high-stakes environments. This comprehensive narrative demonstrates not only my technical expertise but also my leadership and ability to execute complex, cross-functional initiatives.
+
+Note: Out of respect for my past employeers many of these remain high level as to not disclose any trade secrets. Also I tend to leave my latest employer off this list for some time. 
+
+**Vultr** 
+
+**Duration** 1 year
+
+**Brief Description:**
+- Unified Observability: Led development of telemetry and anomaly detection patterns across Vultr’s bare-metal, virtualized, and Kubernetes-based workloads to improve provisioning success rate and latency. 
+- AI/MLOps GTM Strategy & GPU Acceleration: Fundemental in AI/ML workload optimization for single GPU and Clusters for inference and training workloads that were in alignment with vendor reference architecture. optimized fractional, whole card, and networked GPU clusters (Nvidia vGPU, RoCE/Infiniband) telemetry and operations.
+-Security & Compliance Leadership: Directed engineering and audit efforts to secure ISO 27001 and ISO 20000 certifications, establishing best-in-class security and service management standards.
+-Provisioning Automation & SLA Optimization: Designed an AI-enhanced provisioning observability pipeline, reducing errors, lowering time-to-provision by 40%, and improving system responsiveness for millions of global users.
+
+More project breakdowns to be added in the future. 
+
+**Roles Held:**  
+Sr. Director of Platform Engineering
 
 **Moogsoft Logo**
 
@@ -42,7 +59,7 @@ Oversaw all Product, Platform, Enablement and Development at Moogsoft with the e
 - IT Manager to Director of IT/SecOps
 
 **Architecture:**  
-![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg)
+![Moogsoft Logo](/images/MoogsoftSaaSArchitecture.png)
 
 **Projects:**
 
@@ -75,7 +92,7 @@ These features drove strong sales conversion in Q2 and Q3 where we remained abov
 Quarkus Java, Vue, Aurora MySQL
 
 **Visuals:**  
-Moogsoft situation room for working incidents, ![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg), ![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg)
+Moogsoft situation room for working incidents, ![Situation Room 1](/images/OpenIncidentstoSitautionRoom.jpg) ![ituation Room 2](/images/SituationRoom.png) ![ituation Room 3](/images/situationroom01.png)
 
 ---
 

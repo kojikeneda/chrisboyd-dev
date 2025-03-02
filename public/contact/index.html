@@ -17,8 +17,10 @@ Twitter
 
 Or use the form below:
 
+  Your email:
+  
 Your message:
-
+  
 Send
 ">
 <meta name="author" content="">
@@ -88,7 +90,7 @@ Send
         <div class="logo">
             <a href="http://localhost:1313/" accesskey="h" title="Chris Boyd&#39;s Blog (Alt + H)">Chris Boyd&#39;s Blog</a>
             <div class="logo-switches">
-                <button id="theme-toggle" accesskey="t" title="(Alt + T)">
+                <button id="theme-toggle" accesskey="t" title="(Alt + T)" aria-label="Toggle theme">
                     <svg id="moon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24"
                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -155,11 +157,13 @@ Send
 <li><a href="https://twitter.com/yourusername">Twitter</a></li>
 </ul>
 <p>Or use the form below:</p>
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted -->Your message:<!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
-<p><!-- raw HTML omitted -->Send<!-- raw HTML omitted --></p>
-<!-- raw HTML omitted -->
+<form action="https://formspree.io/f/your-form-id" method="POST">
+  <label for="email">Your email:</label>
+  <input type="email" name="email" id="email" required>
+<p><label for="message">Your message:</label></p>
+  <textarea name="message" id="message" rows="5" required></textarea>
+<p><button type="submit">Send</button></p>
+</form>
 
 
   </div>

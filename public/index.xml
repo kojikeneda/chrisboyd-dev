@@ -22,11 +22,13 @@
 &lt;li&gt;&lt;a href=&#34;https://twitter.com/yourusername&#34;&gt;Twitter&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Or use the form below:&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Your message:&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;Send&lt;!-- raw HTML omitted --&gt;&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;</description>
+&lt;form action=&#34;https://formspree.io/f/your-form-id&#34; method=&#34;POST&#34;&gt;
+  &lt;label for=&#34;email&#34;&gt;Your email:&lt;/label&gt;
+  &lt;input type=&#34;email&#34; name=&#34;email&#34; id=&#34;email&#34; required&gt;
+&lt;p&gt;&lt;label for=&#34;message&#34;&gt;Your message:&lt;/label&gt;&lt;/p&gt;
+  &lt;textarea name=&#34;message&#34; id=&#34;message&#34; rows=&#34;5&#34; required&gt;&lt;/textarea&gt;
+&lt;p&gt;&lt;button type=&#34;submit&#34;&gt;Send&lt;/button&gt;&lt;/p&gt;
+&lt;/form&gt;</description>
     </item>
     <item>
       <title>Hello World</title>
@@ -51,10 +53,10 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/about/</guid>
       <description>&lt;h1 id=&#34;about-me&#34;&gt;About Me&lt;/h1&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;p&gt;I’m an engineering executive passionate about turning operational data into actionable insights that drive innovation, reliability, and growth. With a career that spans leadership roles at GoDaddy, Moogsoft, and Vultr, I’ve witnessed firsthand how a robust observability strategy not only enhances system performance but also empowers the teams behind it.&lt;/p&gt;
-&lt;h2 id=&#34;my-journey&#34;&gt;My Journey&lt;/h2&gt;
-&lt;p&gt;Starting my career at GoDaddy, I helped modernize observability and monitoring systems—cutting detection and resolution times significantly while laying the foundation for a culture of continuous improvement. At Moogsoft, I led the transformation of our platform with AI-powered incident management tools, fueling multi-million ARR growth and streamlining operations for enterprise clients. More recently, at Vultr, I spearheaded initiatives that integrated AI and machine learning into monitoring frameworks, optimizing cloud performance and reducing costs on a global scale.&lt;/p&gt;</description>
+&lt;div style=&#34;text-align: center;&#34;&gt;
+  &lt;img src=&#34;http://localhost:1313/images/photo-037.jpg&#34; alt=&#34;Chris Boyd&#34; style=&#34;max-width: 200px; border-radius: 50%;&#34;&gt;
+&lt;/div&gt;
+&lt;p&gt;I’m an engineering executive with a proven track record in turning visionary ideas into scalable, production-grade systems. My experience spans SRE, product management, and full-stack engineering—having led teams at GoDaddy, Moogsoft, and Vultr. I’ve built robust observability frameworks that drive actionable insights while also architecting and operating backend microservices using technologies like Quarkus. Notably, I led a critical migration from a legacy Java agent to a high-performance Rust-based solution, significantly enhancing performance and reducing system footprint. In essence, I combine hands-on technical expertise with strategic leadership to drive products from conception to large-scale operation.&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
