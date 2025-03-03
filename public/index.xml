@@ -16,19 +16,43 @@
       <description>&lt;h1 id=&#34;get-in-touch&#34;&gt;Get in Touch&lt;/h1&gt;
 &lt;p&gt;Feel free to reach out to me through any of the following channels:&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;Email: &lt;a href=&#34;mailto:your@email.com&#34;&gt;your@email.com&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/yourusername&#34;&gt;GitHub&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://linkedin.com/in/yourusername&#34;&gt;LinkedIn&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Email: &lt;a href=&#34;mailto:chrisboyd@gmail.com&#34;&gt;chrisboyd@gmail.com&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/kojikeneda&#34;&gt;GitHub&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://linkedin.com/in/chris-boyd-365b2220/&#34;&gt;LinkedIn&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://twitter.com/yourusername&#34;&gt;Twitter&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;Or use the form below:&lt;/p&gt;
-&lt;form action=&#34;https://formspree.io/f/your-form-id&#34; method=&#34;POST&#34;&gt;
+&lt;style&gt;
+  form.contact-form input, form.contact-form textarea {
+    color: #000;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    padding: 0.5em;
+    font-size: 1em;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  form.contact-form label {
+    display: block;
+    margin-top: 1em;
+    font-weight: bold;
+  }
+  form.contact-form button {
+    margin-top: 1em;
+    padding: 0.7em 1.2em;
+    background-color: #007acc;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  form.contact-form button:hover {
+    background-color: #005fa3;
+  }
+&lt;/style&gt;
+&lt;form class=&#34;contact-form&#34; action=&#34;https://formspree.io/f/mgejdwao&#34; method=&#34;POST&#34; onsubmit=&#34;return trackFormSubmit(event);&#34;&gt;
   &lt;label for=&#34;email&#34;&gt;Your email:&lt;/label&gt;
   &lt;input type=&#34;email&#34; name=&#34;email&#34; id=&#34;email&#34; required&gt;
-&lt;p&gt;&lt;label for=&#34;message&#34;&gt;Your message:&lt;/label&gt;&lt;/p&gt;
-  &lt;textarea name=&#34;message&#34; id=&#34;message&#34; rows=&#34;5&#34; required&gt;&lt;/textarea&gt;
-&lt;p&gt;&lt;button type=&#34;submit&#34;&gt;Send&lt;/button&gt;&lt;/p&gt;
-&lt;/form&gt;</description>
+&lt;p&gt;&lt;label for=&#34;message&#34;&gt;Your message:&lt;/label&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>Hello World</title>

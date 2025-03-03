@@ -23,7 +23,7 @@ menu:
       url: /about/
       weight: 10
     - identifier: Portfolio
-      name: portfolio
+      name: Portfolio
       url: /portfolio/
       weight: 20
     - identifier: posts
