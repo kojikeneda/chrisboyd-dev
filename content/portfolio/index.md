@@ -138,6 +138,7 @@ Several clients were able to reuse the new integration and solve a long standing
 **Tech Stack:**  
 Grafana, Infinity data source plugin, REST APIs
 
+
 ---
 
 **VP of Engineering**
@@ -150,8 +151,6 @@ Oversaw all aspects of engineering with the exception of the data science teams.
 **Key Achievements:**  
 During this time, we reorganized engineering and other parts of the business to focus on the SaaS product. Both the product and team were adding more SaaS features and skillsets respectively. This transition alone was an achievement as we successfully reorganized the business around the SaaS product and engineering started to gain momentum in the new model.
 
-**Promotions Sponsored:**  
-*(Not detailed in the provided text)*
 
 **Projects:**
 
@@ -164,7 +163,10 @@ An integration between a custom built provisioning pipeline, Sales Ops tooling a
 Saw a significant improvement in the trial lifecycle being automated to keep costs down. Estimates were ~10% savings on our cloud spend for the product line.
 
 **Tech Stack:**  
-Stripe, Salesforce, AWS Lambda, DynamoDB, Python, JavaScript, Stripe, Sendgrid, Vue.js
+Stripe, Salesforce, AWS Lambda, DynamoDB, Python, JavaScript, Stripe, Sendgrid, Vue.js, dbt, Marketo
+
+**Visuals:**  
+![SalesOps Middleware](/images/Moogsoft%20Architecture.png)
 
 ---
 
@@ -177,7 +179,7 @@ The initial prototype observability agent for the SaaS product was written in Ja
 Aligning with Rust and selecting Vector as the framework allowed us to deliver numerous capabilities for customers and provided them with a reliable platform we were building on. This allowed customers to take on more complex integrations and deployment models to meet their needs for a local installation of our agent.
 
 **Visuals:**  
-UI controls for agents deployed globally, ![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg)
+UI controls for agents deployed globally, ![Moogsoft Logo](/images/moogsoft_collector.png)
 
 ---
 
@@ -193,7 +195,7 @@ Landed several pending deals and provided an alternative for existing customers 
 Looker, Snowflake, Kafka Streams
 
 **Visuals:**  
-UI controls for agents deployed globally, ![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg)
+UI controls for agents deployed globally, ![Moogsoft Logo](/images/MoogsoftSaaSServiceDashboard.jpg)
 
 ---
 
@@ -262,7 +264,7 @@ Allowed for reporting, analysis and better understanding by the field and suppor
 Rhino Javascript engine, Java, RabbitMQ, MySQL, Nginx, Tomcat
 
 **Visuals:**  
-UI controls for agents deployed globally, ![Moogsoft Logo](/images/MOOG_PrimaryLogo_Navy.jpg)
+UI controls for agents deployed globally, ![Moogsoft Logo](/images/incidentworkflow.jpg)
 
 ---
 
