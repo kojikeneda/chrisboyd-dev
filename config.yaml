@@ -14,6 +14,25 @@ markup:
   goldmark:
     renderer:
       unsafe: true
+  highlight:
+    noClasses: false
+    lineNos: true
+    lineNumbersInTable: true
+    tabWidth: 2
+    lineAnchors: ""
+    lineNoStart: 1
+    lineNoHighlight: ""
+    lineNoHighlightStart: 0
+    lineNoHighlightEnd: 0
+    lineNoHighlightInTable: true
+    lineNoHighlightStartInTable: 0
+    lineNoHighlightEndInTable: 0
+    lineNoHighlightStep: 1
+    lineNoHighlightInTableStep: 1
+    style: "monokai"
+    hl_inline: false
+    hl_languages: []
+    hl_options: ""
 
 # Menu items
 menu:
@@ -26,10 +45,10 @@ menu:
       name: Portfolio
       url: /portfolio/
       weight: 20
-    - identifier: posts
-      name: Blog
-      url: /posts/
-      weight: 30
+    # - identifier: posts
+    #   name: Blog
+    #   url: /posts/
+    #   weight: 30
     - identifier: contact
       name: Contact
       url: /contact/
@@ -58,11 +77,11 @@ params:
   
   # Home page settings
   homeInfoParams:
-    Title: "Welcome to My Blog"
+    Title: "Welcome to My Site"
     Content: >
-      Hi there! I'm Chris Boyd, a software developer passionate about technology.
+      Hi there! I'm Chris Boyd, a engineering leader, passionate about helping teams and individuals grow and succeed. 
       
-      - This is my personal blog where I share my thoughts, projects, and experiences.
+      - This is my personal site where I share my thoughts, projects, and experiences.
       - Feel free to explore my posts and reach out if you have any questions!
   
   # Social icons

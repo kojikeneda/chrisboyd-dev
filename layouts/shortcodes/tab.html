@@ -1,0 +1,6 @@
+{{ $group := printf "tabs-%d" .Parent.Ordinal }}
+{{ $name := .Get 0 }}
+{{ $content := .Inner }}
+{{ $tabs := .Scratch.Get $group | default slice }}
+{{ $tabs = $tabs | append (dict "Name" $name "Content" $content) }}
+{{ .Scratch.Set $group $tabs }} 

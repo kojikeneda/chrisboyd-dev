@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Automation on Chris Boyd&#39;s Blog</title>
+    <link>http://localhost:1313/tags/automation/</link>
+    <description>Recent content in Automation on Chris Boyd&#39;s Blog</description>
+    <generator>Hugo -- 0.145.0</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 03 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/automation/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>From Chaos to Clarity: Managing Unowned Infrastructure with a Simple Maturity Process to Gain Control</title>
+      <link>http://localhost:1313/posts/unownedinfrastructure/</link>
+      <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/unownedinfrastructure/</guid>
+      <description>&lt;h2 id=&#34;introduction&#34;&gt;Introduction&lt;/h2&gt;
+&lt;p&gt;Welcome to the first entry in my series of blogs where I aim share real-world challenges I&amp;rsquo;ve faced at various companies that aren&amp;rsquo;t covered in your standard leadership, management or engineering text.&lt;/p&gt;
+&lt;p&gt;This series focuses more on the challenges we&amp;rsquo;ve all faced when you take on a role or head up a new group. How do you get oriented? how do you get back on a track of execution you are accustomed to? Those are the topics, challenges and solutions we aim to create a guide for.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

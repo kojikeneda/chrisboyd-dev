@@ -1,0 +1,42 @@
+[
+  {
+    "name": "Dev: Start Environment (Idempotent)",
+    "command": "npm run dev:up",
+    "showOutput": true
+  },
+  {
+    "name": "Dev: Stop Environment (Idempotent)",
+    "command": "npm run dev:down",
+    "showOutput": true
+  },
+  {
+    "name": "Dev: Check Logs & Status",
+    "command": "npm run dev:logs",
+    "showOutput": true
+  },
+  {
+    "name": "Prod: Deploy to Production",
+    "command": "npm run prod:deploy",
+    "showOutput": true
+  },
+  {
+    "name": "Telemetry: Start Local Development",
+    "command": "npm run telemetry:dev",
+    "showOutput": true
+  },
+  {
+    "name": "Telemetry: Deploy to Cloudflare",
+    "command": "npm run telemetry:deploy",
+    "showOutput": true
+  },
+  {
+    "name": "Telemetry: Interactive Management",
+    "command": "npm run telemetry",
+    "showOutput": true
+  },
+  {
+    "name": "Telemetry: Rebuild Hugo Site",
+    "command": "npm run telemetry:build",
+    "showOutput": true
+  }
+] 

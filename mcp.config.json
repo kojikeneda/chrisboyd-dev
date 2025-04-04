@@ -1,0 +1,53 @@
+{
+  "mcpServers": {
+    "playwright": {
+      "command": "npx",
+      "args": [
+        "@playwright/mcp@latest"
+      ]
+    }
+  },
+  "commands": {
+    "telemetry": {
+      "dev": {
+        "description": "Start Hugo with telemetry for local development",
+        "command": "./dev.sh",
+        "workingDirectory": "."
+      },
+      "deploy": {
+        "description": "Deploy the telemetry worker to Cloudflare",
+        "command": "npx wrangler deploy",
+        "workingDirectory": "telemetry-service/worker-js"
+      },
+      "update-url": {
+        "description": "Update the worker URL in telemetry.js (replace <your-username> with your Cloudflare username)",
+        "code": "const workerUsername = await vscode.window.showInputBox({ prompt: 'Enter your Cloudflare username' }); if (workerUsername) { const telemetryPath = 'static/js/telemetry.js'; const telemetryContent = await fs.readFile(telemetryPath, 'utf8'); const updatedContent = telemetryContent.replace(/https:\\/\\/chrisboyd-telemetry\\..*?\\.workers\\.dev\\/collect/, `https://chrisboyd-telemetry.${workerUsername}.workers.dev/collect`); await fs.writeFile(telemetryPath, updatedContent, 'utf8'); }"
+      },
+      "rebuild": {
+        "description": "Rebuild Hugo site after updating telemetry worker URL",
+        "command": "hugo",
+        "workingDirectory": "."
+      }
+    },
+    "dev": {
+      "up": {
+        "description": "Idempotent start of local development environment (kills existing processes first)",
+        "code": "const { exec, execSync } = require('child_process'); const fs = require('fs'); const path = require('path'); function isPortInUse(port) { try { execSync('lsof -i:' + port, { stdio: 'ignore' }); return true; } catch (e) { return false; } } console.log('Cleaning up existing processes...'); try { execSync('pkill -f \"hugo server\" || true', { stdio: 'ignore' }); } catch (e) {} try { execSync('pkill -f \"go run.*telemetry-service/main.go\" || true', { stdio: 'ignore' }); } catch (e) {} [8080, 1313].forEach(port => { if (isPortInUse(port)) { try { const pid = execSync('lsof -t -i:' + port).toString().trim(); console.log('Killing process on port ' + port + ' (PID: ' + pid + ')'); execSync('kill -9 ' + pid, { stdio: 'ignore' }); } catch (e) {} } }); setTimeout(() => { console.log('Starting local development environment...'); const child = exec('./dev.sh', { cwd: process.cwd() }); child.stdout.pipe(process.stdout); child.stderr.pipe(process.stderr); setTimeout(() => { if (isPortInUse(1313) && isPortInUse(8080)) { console.log('🟢 Local development environment is running!'); console.log('   Hugo: http://localhost:1313'); console.log('   Telemetry Service: http://localhost:8080'); } else { console.log('⚠️  Warning: Not all services appear to be running.'); console.log('   Run \"npm run dev:logs\" to check for errors.'); } }, 5000); }, 1000);"
+      },
+      "down": {
+        "description": "Idempotent shutdown of local development environment",
+        "code": "const { execSync } = require('child_process'); console.log('Shutting down local development environment...'); try { execSync('pkill -f \"hugo server\" || true'); } catch (e) {} try { execSync('pkill -f \"go run.*telemetry-service/main.go\" || true'); } catch (e) {} function isPortInUse(port) { try { execSync('lsof -i:' + port, { stdio: 'ignore' }); return true; } catch (e) { return false; } } [8080, 1313].forEach(port => { if (isPortInUse(port)) { try { const pid = execSync('lsof -t -i:' + port).toString().trim(); console.log('Killing process on port ' + port + ' (PID: ' + pid + ')'); execSync('kill -9 ' + pid); } catch (e) {} } }); setTimeout(() => { const running = [8080, 1313].filter(port => isPortInUse(port)); if (running.length === 0) { console.log('🟢 All development services successfully stopped.'); } else { console.log('⚠️  Warning: Some services are still running on ports: ' + running.join(', ')); console.log('   Try running \"npm run dev:down\" again or kill processes manually.'); } }, 1000);"
+      },
+      "logs": {
+        "description": "Check the logs of the local development environment",
+        "code": "const { execSync } = require('child_process'); console.log('Displaying logs for local development environment...'); function isProcessRunning(pattern) { try { const result = execSync('pgrep -f \"' + pattern + '\"').toString().trim(); return result !== ''; } catch (e) { return false; } } const hugoRunning = isProcessRunning('hugo server'); const telemetryRunning = isProcessRunning('go run.*telemetry-service/main.go'); if (!hugoRunning && !telemetryRunning) { console.log('⚠️  No development services are currently running.'); console.log('   Run \"npm run dev:up\" to start the development environment.'); return; } console.log('Development services status:'); console.log('   Hugo Server: ' + (hugoRunning ? '🟢 Running' : '🔴 Stopped')); console.log('   Telemetry Service: ' + (telemetryRunning ? '🟢 Running' : '🔴 Stopped')); if (hugoRunning) { console.log('\\n=== Hugo Server Logs ==='); execSync('ps -ef | grep \"hugo server\" | grep -v grep', { stdio: 'inherit' }); } if (telemetryRunning) { console.log('\\n=== Telemetry Service Logs ==='); execSync('ps -ef | grep \"go run.*telemetry-service/main.go\" | grep -v grep', { stdio: 'inherit' }); }"
+      }
+    },
+    "prod": {
+      "deploy": {
+        "description": "Idempotent deployment to production",
+        "code": "const { execSync } = require('child_process'); const readline = require('readline'); const rl = readline.createInterface({ input: process.stdin, output: process.stdout }); console.log('Starting production deployment workflow...'); function runCommand(command, cwd = process.cwd()) { try { console.log('Running: ' + command); execSync(command, { cwd, stdio: 'inherit' }); return true; } catch (error) { console.error('Error executing command: ' + error.message); return false; } } rl.question('🚨 Are you sure you want to deploy to production? (y/N): ', async (answer) => { if (answer.toLowerCase() !== 'y') { console.log('Deployment cancelled.'); rl.close(); return; } console.log('Starting production deployment...'); console.log('\\n🔄 Step 1: Deploying Cloudflare Worker...'); runCommand('npx wrangler whoami || npx wrangler login', 'telemetry-service/worker-js'); const workerSuccess = runCommand('npx wrangler deploy', 'telemetry-service/worker-js'); if (!workerSuccess) { console.log('❌ Worker deployment failed. Aborting production deployment.'); rl.close(); return; } console.log('\\n🔄 Step 2: Updating worker URL in telemetry.js...'); rl.question('Enter your Cloudflare username: ', (username) => { if (!username) { console.log('Username is required. Aborting production deployment.'); rl.close(); return; } try { const fs = require('fs'); const path = require('path'); const telemetryJsPath = path.join(process.cwd(), 'static', 'js', 'telemetry.js'); let content = fs.readFileSync(telemetryJsPath, 'utf8'); content = content.replace(/['\"](https:\\/\\/chrisboyd-telemetry\\..*?\\.workers\\.dev\\/collect)['\"]/g, `'https://chrisboyd-telemetry.${username}.workers.dev/collect'`); fs.writeFileSync(telemetryJsPath, content); console.log('✅ Updated telemetry.js with your Cloudflare Worker URL.'); console.log('\\n🔄 Step 3: Rebuilding Hugo site...'); const rebuildSuccess = runCommand('hugo', process.cwd()); if (!rebuildSuccess) { console.log('❌ Hugo rebuild failed. Production deployment incomplete.'); rl.close(); return; } console.log('\\n🔄 Step 4: The Hugo site should be automatically deployed by Cloudflare Pages'); console.log('   You may need to manually trigger a deployment in the Cloudflare Pages dashboard'); console.log('   or push your changes to GitHub to trigger a deployment.'); console.log('\\n✅ Production deployment workflow complete!'); rl.close(); } catch (error) { console.error('Error during deployment: ' + error.message); rl.close(); } }); });"
+      }
+    }
+  }
+} 

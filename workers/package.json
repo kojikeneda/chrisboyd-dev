@@ -1,0 +1,21 @@
+{
+  "name": "chrisboyd-telemetry",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "Telemetry collector for chrisboyd.dev with OpenTelemetry and Dash0 integration",
+  "dependencies": {
+    "otel-cf-workers": "github:evanderkoogh/otel-cf-workers"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  },
+  "type": "module"
+} 

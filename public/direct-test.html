@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dash0 API Direct Test</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #2c3e50;
+    }
+    .input-group {
+      margin-bottom: 15px;
+    }
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input[type="text"], textarea {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+    textarea {
+      height: 150px;
+    }
+    button {
+      background-color: #3498db;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #2980b9;
+    }
+    #result {
+      margin-top: 20px;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 4px;
+      white-space: pre-wrap;
+      font-family: monospace;
+    }
+    .success {
+      color: #27ae60;
+    }
+    .error {
+      color: #e74c3c;
+    }
+    #spinner {
+      display: none;
+      margin-left: 10px;
+      animation: spin 1s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <h1>Dash0 API Direct Test Tool</h1>
+  <p>This tool tests the Dash0 API directly without OpenTelemetry to help isolate authentication issues.</p>
+  
+  <div class="input-group">
+    <label for="token">Dash0 Auth Token:</label>
+    <input type="text" id="token" placeholder="Enter your Dash0 auth token" value="">
+  </div>
+  
+  <div class="input-group">
+    <label for="url">API Endpoint:</label>
+    <input type="text" id="url" value="https://ingress.us-west-2.aws.dash0.com/v1/traces">
+  </div>
+  
+  <div class="input-group">
+    <label for="payload">Test Payload (JSON):</label>
+    <textarea id="payload">{
+  "resourceSpans": [{
+    "resource": {
+      "attributes": [{
+        "key": "service.name",
+        "value": { "stringValue": "test-service" }
+      }]
+    },
+    "scopeSpans": [{
+      "scope": { "name": "test-scope" },
+      "spans": [{
+        "traceId": "abcdef1234567890abcdef1234567890",
+        "spanId": "abcdef1234567890",
+        "name": "test-span",
+        "kind": 1,
+        "startTimeUnixNano": "1592923225694813000",
+        "endTimeUnixNano": "1592923225694823000",
+        "attributes": [{
+          "key": "test.attribute",
+          "value": { "stringValue": "test-value" }
+        }]
+      }]
+    }]
+  }]
+}</textarea>
+  </div>
+  
+  <button id="testButton">Test API Connection</button>
+  <span id="spinner">⟳</span>
+  
+  <div id="result">Results will appear here...</div>
+  
+  <script>
+    document.getElementById('testButton').addEventListener('click', async () => {
+      const tokenInput = document.getElementById('token');
+      const urlInput = document.getElementById('url');
+      const payloadInput = document.getElementById('payload');
+      const resultDiv = document.getElementById('result');
+      const spinner = document.getElementById('spinner');
+      
+      // Validate inputs
+      if (!tokenInput.value.trim()) {
+        resultDiv.innerHTML = '<span class="error">Error: Auth token is required</span>';
+        return;
+      }
+      
+      try {
+        // Show spinner
+        spinner.style.display = 'inline-block';
+        resultDiv.innerHTML = 'Sending request...';
+        
+        // Prepare request
+        const token = tokenInput.value.trim();
+        const url = urlInput.value.trim();
+        const payload = JSON.parse(payloadInput.value);
+        
+        // Display request details
+        let output = '--- REQUEST DETAILS ---\n';
+        output += `URL: ${url}\n`;
+        output += `Token (first 4 chars): ${token.substring(0, 4)}...\n`;
+        output += `Token length: ${token.length} characters\n\n`;
+        
+        // Send request with explicit headers
+        const response = await fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+          },
+          body: JSON.stringify(payload)
+        });
+        
+        // Parse response
+        const responseText = await response.text();
+        let responseData;
+        try {
+          responseData = JSON.parse(responseText);
+        } catch (e) {
+          responseData = responseText;
+        }
+        
+        // Display response
+        output += '--- RESPONSE ---\n';
+        output += `Status: ${response.status} ${response.statusText}\n`;
+        output += 'Headers:\n';
+        response.headers.forEach((value, key) => {
+          output += `  ${key}: ${value}\n`;
+        });
+        output += '\nResponse Body:\n';
+        output += typeof responseData === 'object' 
+          ? JSON.stringify(responseData, null, 2) 
+          : responseData;
+        
+        // Add success/error class
+        if (response.ok) {
+          resultDiv.innerHTML = `<span class="success">✓ Success!</span>\n\n${output}`;
+        } else {
+          resultDiv.innerHTML = `<span class="error">✗ Error: ${response.status} ${response.statusText}</span>\n\n${output}`;
+        }
+      } catch (error) {
+        resultDiv.innerHTML = `<span class="error">✗ Exception: ${error.message}</span>`;
+        console.error('Error testing API:', error);
+      } finally {
+        // Hide spinner
+        spinner.style.display = 'none';
+      }
+    });
+    
+    // Try to get token from DASH0_CONFIG if available
+    window.addEventListener('load', () => {
+      if (window.DASH0_CONFIG && window.DASH0_CONFIG.auth) {
+        document.getElementById('token').value = window.DASH0_CONFIG.auth;
+      }
+    });
+  </script>
+</body>
+</html> 

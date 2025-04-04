@@ -1,0 +1,38 @@
+{
+  "name": "chrisboyd.dev",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "./dev.sh",
+    "dev:up": "node scripts/mcp.js dev up",
+    "dev:down": "node scripts/mcp.js dev down",
+    "dev:logs": "node scripts/mcp.js dev logs",
+    "prod:deploy": "node scripts/mcp.js prod deploy",
+    "telemetry": "node scripts/telemetry.mjs",
+    "telemetry:dev": "./dev.sh",
+    "telemetry:deploy": "cd telemetry-service/worker-js && npx wrangler deploy",
+    "telemetry:build": "hugo",
+    "mcp": "node scripts/mcp.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kojikeneda/chrisboyd-dev.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kojikeneda/chrisboyd-dev/issues"
+  },
+  "homepage": "https://github.com/kojikeneda/chrisboyd-dev#readme",
+  "description": "",
+  "devDependencies": {
+    "@playwright/test": "^1.51.1",
+    "@types/node": "^22.14.0",
+    "dotenv": "^16.4.7",
+    "openai": "^4.91.1"
+  },
+  "dependencies": {
+    "playwright": "^1.51.1"
+  }
+}

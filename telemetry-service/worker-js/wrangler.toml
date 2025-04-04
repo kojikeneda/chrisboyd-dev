@@ -1,0 +1,10 @@
+name = "chrisboyd-telemetry"
+main = "index.js"
+compatibility_date = "2025-04-03"
+
+[vars]
+# These will be set in the Cloudflare dashboard
+# DASH0_API_KEY = ""
+# DASH0_ENDPOINT = "https://ingress.us-west-2.aws.dash0.com:4317"
+# DASH0_DATASET = "default"
+# OTEL_SERVICE_NAME = "chrisboyd-blog" 

@@ -5,19 +5,11 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <meta name="robots" content="noindex, nofollow">
-<title>Hello World | Chris Boyd&#39;s Blog</title>
-<meta name="keywords" content="introduction, blog">
-<meta name="description" content="Hello World!
-This is my first blog post. I&rsquo;m excited to start sharing my thoughts and experiences here.
-What to Expect
-In this blog, I&rsquo;ll be writing about:
-
-Technology trends
-Software development
-Personal projects
-And more!
-
-Stay tuned for more content coming soon!">
+<title>From Chaos to Clarity: Wrangling Unowned Infrastructure and it&#39;s hidden costs | Chris Boyd&#39;s Blog</title>
+<meta name="keywords" content="infrastructure, automation, observability, cloud, IT management">
+<meta name="description" content="Introduction
+Welcome to the first entry in my series of blogs where I look to provide a resource for other engineering leaders who might be struggling with similar problems. I aim to talk about real world problems you aren&rsquo;t likely to find in your average tech book.
+In today’s post, I want to discuss a gap I&rsquo;ve run into twice at largely successful companies that unlocked the power of automation creating a data model that helps support automation throughout the company. I&rsquo;ll detail how untracked infrastructure can lead to waste in cloud/Infrastructure spend, and how a robust, metadata-enriched inventory sourced from public and private cloud APIs empowers automation to keep pace with business needs. Organizing data by service, team, business unit, or other relevant criteria not only streamlines operations but also lays the groundwork for a culture of accountability and rapid innovation.">
 <meta name="author" content="">
 <link rel="canonical" href="http://localhost:1313/posts/hello-world/">
 <link crossorigin="anonymous" href="/assets/css/stylesheet.45e028aa8ce0961349adf411b013ee39406be2c0bc80d4ea3fc04555f7f4611a.css" integrity="sha256-ReAoqozglhNJrfQRsBPuOUBr4sC8gNTqP8BFVff0YRo=" rel="preload stylesheet" as="style">
@@ -137,31 +129,86 @@ Stay tuned for more content coming soon!">
   <header class="post-header">
     <div class="breadcrumbs"><a href="http://localhost:1313/">Home</a>&nbsp;»&nbsp;<a href="http://localhost:1313/posts/">Posts</a></div>
     <h1 class="post-title entry-hint-parent">
-      Hello World
+      From Chaos to Clarity: Wrangling Unowned Infrastructure and it&#39;s hidden costs
     </h1>
-    <div class="post-meta"><span title='2023-01-01 00:00:00 +0000 UTC'>January 1, 2023</span>&nbsp;·&nbsp;1 min
+    <div class="post-meta"><span title='2025-03-03 00:00:00 +0000 UTC'>March 3, 2025</span>&nbsp;·&nbsp;6 min
 
 </div>
   </header> 
-  <div class="post-content"><h1 id="hello-world">Hello World!<a hidden class="anchor" aria-hidden="true" href="#hello-world">#</a></h1>
-<p>This is my first blog post. I&rsquo;m excited to start sharing my thoughts and experiences here.</p>
-<h2 id="what-to-expect">What to Expect<a hidden class="anchor" aria-hidden="true" href="#what-to-expect">#</a></h2>
-<p>In this blog, I&rsquo;ll be writing about:</p>
-<ol>
-<li>Technology trends</li>
-<li>Software development</li>
-<li>Personal projects</li>
-<li>And more!</li>
-</ol>
-<p>Stay tuned for more content coming soon!</p>
+  <div class="post-content"><h2 id="introduction">Introduction<a hidden class="anchor" aria-hidden="true" href="#introduction">#</a></h2>
+<p>Welcome to the first entry in my series of blogs where I look to provide a resource for other engineering leaders who might be struggling with similar problems. I aim to talk about real world problems you aren&rsquo;t likely to find in your average tech book.</p>
+<p>In today’s post, I want to discuss a gap I&rsquo;ve run into twice at largely successful companies that unlocked the power of automation creating a data model that helps support automation throughout the company. I&rsquo;ll detail how untracked infrastructure can lead to waste in cloud/Infrastructure spend, and how a robust, metadata-enriched inventory sourced from public and private cloud APIs empowers automation to keep pace with business needs. Organizing data by service, team, business unit, or other relevant criteria not only streamlines operations but also lays the groundwork for a culture of accountability and rapid innovation.</p>
+<hr>
+<h2 id="detecting-shadow-it-and-unknown-systems">Detecting Shadow IT and Unknown Systems<a hidden class="anchor" aria-hidden="true" href="#detecting-shadow-it-and-unknown-systems">#</a></h2>
+<p>The first step toward reclaiming control over your infrastructure is to shine a light on what’s hidden. Shadow IT can emerge when departments or teams procure and deploy systems without central oversight. Here are some practical approaches to detecting these unknown systems:</p>
+<ul>
+<li><strong>Network Scanning &amp; Monitoring:</strong> Deploy tools that continuously monitor network traffic to flag unusual or unauthorized communications.</li>
+<li><strong>User Behavior Analytics:</strong> Leverage data analytics to detect anomalies in user activity that may indicate the use of unsanctioned applications.</li>
+<li><strong>Integrating Security Platforms:</strong> Use security information and event management (SIEM) systems that aggregate logs from various sources, helping you spot deviations from standard behavior.</li>
+</ul>
+<p>By identifying these systems early, you can begin to map out your digital estate and plan for proper integration or decommissioning.</p>
+<hr>
+<h2 id="automating-metadata-tagging-and-documentation">Automating Metadata Tagging and Documentation<a hidden class="anchor" aria-hidden="true" href="#automating-metadata-tagging-and-documentation">#</a></h2>
+<p>Manual documentation of infrastructure is not only time-consuming but also prone to errors. Automation is key to maintaining accurate records:</p>
+<ul>
+<li><strong>Metadata Tagging:</strong> Develop scripts or use tools that automatically tag resources with metadata such as owner, creation date, and purpose. This information can be vital for auditing and compliance.</li>
+<li><strong>Self-Updating Documentation:</strong> Integrate documentation tools that update in real time as changes occur in your environment, ensuring that your inventory is always current.</li>
+<li><strong>Unified Data Models:</strong> Standardize how metadata is recorded across platforms, ensuring consistency in how systems are tracked and managed.</li>
+</ul>
+<p>Automation not only reduces human error but also lays the foundation for data-driven decision-making.</p>
+<hr>
+<h2 id="creating-an-inventory-to-power-automation">Creating an Inventory to Power Automation<a hidden class="anchor" aria-hidden="true" href="#creating-an-inventory-to-power-automation">#</a></h2>
+<p>A well-maintained inventory is the backbone of any robust infrastructure management strategy. Here’s how to create and leverage one:</p>
+<ul>
+<li><strong>Centralized Inventory Management:</strong> Build a central repository where every asset—from servers to software instances—is logged with essential metadata.</li>
+<li><strong>Common Configuration Management:</strong> Employ configuration management tools (like Ansible, Puppet, or Chef) to enforce consistency across systems.</li>
+<li><strong>Job Runners and Automation:</strong> Integrate automation platforms that can execute routine tasks based on the inventory’s data, such as scaling resources or deploying updates.</li>
+<li><strong>Service-Oriented Data Model:</strong> Transition from an asset-centric view to a service-oriented one. By mapping infrastructure components to the services they support, you gain insights into how system changes affect business operations.</li>
+</ul>
+<p>Additionally, consider leveraging public and private cloud APIs as inventory sources. By automatically pulling in data and enriching it with metadata, you can organize assets by service, team, business unit, or other business-critical categories. This powerful approach enables automation that not only maintains control but also accelerates the pace at which your company can innovate.</p>
+<p>This inventory becomes the engine that powers automation, ensuring that every component of your infrastructure is accounted for and optimized for performance.</p>
+<hr>
+<h2 id="leveraging-automation-for-compliance-and-performance">Leveraging Automation for Compliance and Performance<a hidden class="anchor" aria-hidden="true" href="#leveraging-automation-for-compliance-and-performance">#</a></h2>
+<p>Once you have a comprehensive inventory with rich metadata, automation can further enhance your operational visibility:</p>
+<ul>
+<li><strong>Ownership &amp; Compliance Reporting:</strong> Use automation to generate real-time reports on who owns what, ensuring that every asset is managed by a responsible party.</li>
+<li><strong>Availability &amp; Performance Metrics:</strong> Integrate performance monitoring tools that use the inventory data to track uptime, latency, and other key metrics. This provides a data-driven approach to identifying areas for improvement.</li>
+<li><strong>Data-Driven Decision Making:</strong> With a clear picture of your infrastructure, decisions about scaling, decommissioning, or upgrading systems can be based on solid evidence rather than guesswork.</li>
+</ul>
+<p>This approach not only boosts operational efficiency but also provides the transparency needed to meet compliance and regulatory standards.</p>
+<hr>
+<h2 id="driving-cost-efficiency-and-accountability">Driving Cost Efficiency and Accountability<a hidden class="anchor" aria-hidden="true" href="#driving-cost-efficiency-and-accountability">#</a></h2>
+<p>Beyond compliance and performance, managing unowned infrastructure effectively also has a direct impact on your organization’s bottom line and culture:</p>
+<ul>
+<li><strong>Avoiding Cloud Spend Waste:</strong> Untracked infrastructure often leads to duplicated resources, orphaned instances, or underutilized assets that inflate cloud spending unnecessarily. A well-maintained inventory helps identify and eliminate wasteful expenditures.</li>
+<li><strong>A Culture of Accountability:</strong> Establishing clear ownership and responsibility ensures that teams are not only aware of the state of their systems but are also encouraged to proactively improve data accuracy and process maturity. Regular reviews and updates become part of the organizational DNA.</li>
+<li><strong>Live Infrastructure as the Source of Truth:</strong> While abstractions and automated systems are useful, they can introduce drift from the real, live environment. Always validate your records against the actual running infrastructure to avoid discrepancies that can lead to inefficiencies or security risks. Trusting live data ensures that decision-making is grounded in reality.</li>
+</ul>
+<p>By embedding these practices into your operational processes, you create an environment where cost efficiency and accountability drive continuous improvement.</p>
+<hr>
+<h2 id="service-oriented-observability-with-modern-tools">Service-Oriented Observability with Modern Tools<a hidden class="anchor" aria-hidden="true" href="#service-oriented-observability-with-modern-tools">#</a></h2>
+<p>Observability is crucial for understanding the behavior of your services in real time. Tools like <a href="https://grafana.com/docs/mimir/latest/">Mimir</a>, <a href="https://grafana.com/docs/loki/latest/">Loki</a>, and <a href="https://opentelemetry.io/">OpenTelemetry</a> play a pivotal role in this process:</p>
+<ul>
+<li><strong>Mimir for Metrics Aggregation:</strong> Use Mimir to collect and aggregate metrics across your infrastructure, providing a high-level view of system performance and resource usage.</li>
+<li><strong>Loki for Log Aggregation:</strong> Centralize and analyze logs from various systems with Loki. This enables quick identification of issues and helps in troubleshooting.</li>
+<li><strong>OpenTelemetry for Tracing:</strong> Implement OpenTelemetry to track distributed traces, helping you understand the flow of requests across your microservices architecture.</li>
+</ul>
+<p>Together, these tools facilitate a service-oriented approach to observability, ensuring that every component is monitored, and ownership is clearly defined. This integrated view empowers teams to quickly respond to incidents and continuously improve system performance.</p>
+<hr>
+<h2 id="conclusion">Conclusion<a hidden class="anchor" aria-hidden="true" href="#conclusion">#</a></h2>
+<p>Transitioning from chaos to clarity in managing unowned infrastructure is not an overnight process—it requires a deliberate, mature approach that embraces automation, comprehensive documentation, and observability. By detecting shadow IT early, automating metadata tagging, building a centralized inventory, and leveraging modern observability tools, organizations can gain unprecedented control over their infrastructure. Coupled with a focus on cost efficiency, accountability, and validating live data as the ultimate source of truth, this strategy not only enhances compliance and performance but also paves the way for a more agile, responsible, and resilient IT environment.</p>
+<p>Embrace the journey from chaos to clarity, and transform how your organization manages its digital assets—one proactive, data-driven step at a time.</p>
 
 
   </div>
 
   <footer class="post-footer">
     <ul class="post-tags">
-      <li><a href="http://localhost:1313/tags/introduction/">Introduction</a></li>
-      <li><a href="http://localhost:1313/tags/blog/">Blog</a></li>
+      <li><a href="http://localhost:1313/tags/infrastructure/">Infrastructure</a></li>
+      <li><a href="http://localhost:1313/tags/automation/">Automation</a></li>
+      <li><a href="http://localhost:1313/tags/observability/">Observability</a></li>
+      <li><a href="http://localhost:1313/tags/cloud/">Cloud</a></li>
+      <li><a href="http://localhost:1313/tags/it-management/">IT Management</a></li>
     </ul>
 
   </footer>

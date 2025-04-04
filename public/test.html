@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenTelemetry Test Page</title>
+  
+  <!-- Set up configuration -->
+  <script>
+    window.DASH0_CONFIG = {
+      auth: "your_test_token", // Replace with your actual token for testing
+      environment: "test"
+    };
+  </script>
+  
+  <!-- Load OpenTelemetry bundle -->
+  <script src="js/otel.js" defer></script>
+  
+  <!-- Load test helper -->
+  <script src="js/test-telemetry.js" defer></script>
+  
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .test-section {
+      margin: 2rem 0;
+      padding: 1rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+    button {
+      background: #3498db;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-right: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    button:hover {
+      background: #2980b9;
+    }
+    .status {
+      margin-top: 1rem;
+      padding: 1rem;
+      background: #f8f9fa;
+      border-radius: 4px;
+    }
+    .log {
+      background: #1e272e;
+      color: #d2dae2;
+      padding: 1rem;
+      border-radius: 4px;
+      font-family: monospace;
+      white-space: pre;
+      overflow-x: auto;
+      margin-top: 1rem;
+    }
+    .success {
+      color: #2ecc71;
+    }
+    .error {
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <h1>OpenTelemetry Direct Test Page</h1>
+  <p>This page directly loads the OpenTelemetry bundle and test helper to verify functionality.</p>
+  
+  <div class="test-section">
+    <h2>Manual Testing</h2>
+    <button id="createSpan">Create Test Span</button>
+    <button id="simulateError">Simulate Error</button>
+    <button id="simulateXhr">Test XHR Request</button>
+    <button id="simulateFetch">Test Fetch Request</button>
+    
+    <div class="status">
+      <h3>Test Results</h3>
+      <div id="testResults">Run tests to see results...</div>
+    </div>
+    
+    <div class="log" id="logOutput"></div>
+  </div>
+  
+  <script>
+    // Set up console capturing
+    const originalConsole = {
+      log: console.log,
+      error: console.error,
+      warn: console.warn,
+      info: console.info
+    };
+    
+    const logOutput = document.getElementById('logOutput');
+    
+    function appendToLog(method, ...args) {
+      const message = args.map(arg => 
+        typeof arg === 'object' ? JSON.stringify(arg, null, 2) : String(arg)
+      ).join(' ');
+      
+      const logLine = document.createElement('div');
+      logLine.className = method === 'error' ? 'error' : '';
+      logLine.textContent = `[${method.toUpperCase()}] ${message}`;
+      logOutput.appendChild(logLine);
+      
+      // Call the original method
+      originalConsole[method](...args);
+    }
+    
+    // Override console methods
+    console.log = (...args) => appendToLog('log', ...args);
+    console.error = (...args) => appendToLog('error', ...args);
+    console.warn = (...args) => appendToLog('warn', ...args);
+    console.info = (...args) => appendToLog('info', ...args);
+    
+    // Set up test buttons
+    document.getElementById('createSpan').addEventListener('click', () => {
+      if (window.__OTEL__ && window.__OTEL__.tracer) {
+        const span = window.__OTEL__.tracer.startSpan('manual-button-click');
+        span.setAttribute('button', 'createSpan');
+        span.setAttribute('timestamp', Date.now());
+        
+        setTimeout(() => {
+          span.end();
+          console.log('✅ Manual test span created and completed');
+          updateResults('Span created successfully');
+        }, 500);
+      } else {
+        console.error('❌ OpenTelemetry not initialized');
+        updateResults('Error: OpenTelemetry not initialized', true);
+      }
+    });
+    
+    document.getElementById('simulateError').addEventListener('click', () => {
+      try {
+        // Intentional error
+        console.log('🔄 Triggering intentional error for testing');
+        throw new Error('Test error for OpenTelemetry');
+      } catch (e) {
+        console.error('❌ Test error caught:', e);
+        updateResults('Test error generated', false);
+      }
+    });
+    
+    document.getElementById('simulateXhr').addEventListener('click', () => {
+      const xhr = new XMLHttpRequest();
+      xhr.open('GET', 'https://httpbin.org/get?test=otel');
+      xhr.onload = () => {
+        console.log('✅ XHR test request completed');
+        updateResults('XHR request completed');
+      };
+      xhr.onerror = (e) => {
+        console.error('❌ XHR test request failed:', e);
+        updateResults('XHR request failed', true);
+      };
+      xhr.send();
+      console.log('🔄 XHR test request sent');
+    });
+    
+    document.getElementById('simulateFetch').addEventListener('click', () => {
+      fetch('https://httpbin.org/get?test=otel')
+        .then(response => {
+          console.log('✅ Fetch test request completed');
+          return response.json();
+        })
+        .then(data => {
+          console.log('✅ Fetch response data:', data);
+          updateResults('Fetch request completed');
+        })
+        .catch(error => {
+          console.error('❌ Fetch test request failed:', error);
+          updateResults('Fetch request failed', true);
+        });
+      console.log('🔄 Fetch test request sent');
+    });
+    
+    function updateResults(message, isError = false) {
+      const testResults = document.getElementById('testResults');
+      const resultElement = document.createElement('div');
+      resultElement.className = isError ? 'error' : 'success';
+      resultElement.textContent = `${new Date().toISOString().split('T')[1].split('.')[0]} - ${message}`;
+      testResults.appendChild(resultElement);
+    }
+    
+    // Check OpenTelemetry status on load
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        if (window.__OTEL__) {
+          console.log('✅ OpenTelemetry loaded successfully');
+          updateResults('OpenTelemetry initialized');
+        } else {
+          console.error('❌ OpenTelemetry failed to initialize');
+          updateResults('OpenTelemetry initialization failed', true);
+        }
+      }, 2000);
+    });
+  </script>
+</body>
+</html> 
