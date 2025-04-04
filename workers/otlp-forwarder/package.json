@@ -1,0 +1,18 @@
+{
+  "name": "otlp-forwarder",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker that receives OTLP data and forwards it to Dash0",
+  "main": "index.js",
+  "scripts": {
+    "deploy": "wrangler deploy",
+    "dev": "wrangler dev"
+  },
+  "dependencies": {
+    "@opentelemetry/api": "^1.6.0",
+    "@opentelemetry/resources": "^1.16.0",
+    "@opentelemetry/semantic-conventions": "^1.16.0"
+  },
+  "devDependencies": {
+    "wrangler": "^3.22.1"
+  }
+} 

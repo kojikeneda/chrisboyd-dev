@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Chris Boyd&#39;s Blog</title>
-    <link>https://chrisboyd.dev/</link>
+    <link>http://localhost:65083/</link>
     <description>Recent content on Chris Boyd&#39;s Blog</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 01 Jan 2023 00:00:00 +0000</lastBuildDate>
-    <atom:link href="https://chrisboyd.dev/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:65083/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Contact</title>
-      <link>https://chrisboyd.dev/contact/</link>
+      <link>http://localhost:65083/contact/</link>
       <pubDate>Sun, 01 Jan 2023 00:00:00 +0000</pubDate>
-      <guid>https://chrisboyd.dev/contact/</guid>
+      <guid>http://localhost:65083/contact/</guid>
       <description>&lt;h1 id=&#34;get-in-touch&#34;&gt;Get in Touch&lt;/h1&gt;
 &lt;p&gt;Feel free to reach out to me through any of the following channels:&lt;/p&gt;
 &lt;ul&gt;
@@ -56,20 +56,20 @@
     </item>
     <item>
       <title></title>
-      <link>https://chrisboyd.dev/about/</link>
+      <link>http://localhost:65083/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://chrisboyd.dev/about/</guid>
+      <guid>http://localhost:65083/about/</guid>
       <description>&lt;h1 id=&#34;about-me&#34;&gt;About Me&lt;/h1&gt;
 &lt;div style=&#34;text-align: center;&#34;&gt;
-  &lt;img src=&#34;https://chrisboyd.dev/images/photo-037.jpg&#34; alt=&#34;Chris Boyd&#34; style=&#34;max-width: 200px; border-radius: 50%;&#34;&gt;
+  &lt;img src=&#34;http://localhost:65083/images/photo-037.jpg&#34; alt=&#34;Chris Boyd&#34; style=&#34;max-width: 200px; border-radius: 50%;&#34;&gt;
 &lt;/div&gt;
 &lt;p&gt;I’m an engineering executive with a proven track record in turning clever ideas into scalable, production-grade systems. My experience spans SRE, product management, and full-stack engineering, having led teams at GoDaddy, Moogsoft, and Vultr. I’ve built robust observability frameworks that drive actionable insights while also architecting and operating backend microservices using technologies like Quarkus. Notably, I led a critical migration from a legacy Java agent to a high-performance Rust-based solution, significantly enhancing performance and reducing system footprint. In essence, I combine hands-on technical expertise with strategic leadership to drive products from conception to large-scale operation.&lt;/p&gt;</description>
     </item>
     <item>
       <title></title>
-      <link>https://chrisboyd.dev/portfolio/</link>
+      <link>http://localhost:65083/portfolio/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://chrisboyd.dev/portfolio/</guid>
+      <guid>http://localhost:65083/portfolio/</guid>
       <description>&lt;h1 id=&#34;company--role--project-structure&#34;&gt;Company / Role / Project Structure&lt;/h1&gt;
 &lt;p&gt;&lt;strong&gt;Moogsoft / Head of Engineering&lt;/strong&gt;&lt;/p&gt;
 &lt;h3 id=&#34;how-to-read-this-section&#34;&gt;How to Read This Section&lt;/h3&gt;

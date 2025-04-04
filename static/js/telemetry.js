@@ -4,12 +4,14 @@
   const isProd = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
   
   // Use different endpoints for dev and prod
-  const telemetryEndpoint = isProd
-    ? 'https://chrisboyd-otel-worker.chrisdboyd.workers.dev/v1/traces' // OpenTelemetry OTLP/HTTP endpoint
+  const telemetryEndpoint = isProd ? 'https://chrisboyd-telemetry.chrisdboyd.workers.dev/v1/traces' // OpenTelemetry OTLP/HTTP endpoint
     : 'http://localhost:24318/v1/traces'; // Local OTLP development endpoint
   
   // Authentication token - in production, this would be set securely
   const authToken = isProd ? null : 'chrisboyd-dev-token-123';
+  
+  // Dataset configuration
+  const dataset = isProd ? 'production' : 'development';
   
   // Queue to batch events
   let eventQueue = [];
@@ -35,7 +37,9 @@
         { key: "service.name", value: { stringValue: "chrisboyd-blog" } },
         { key: "service.version", value: { stringValue: "1.0.0" } },
         { key: "telemetry.sdk.name", value: { stringValue: "custom-js" } },
-        { key: "telemetry.sdk.version", value: { stringValue: "1.0.0" } }
+        { key: "telemetry.sdk.version", value: { stringValue: "1.0.0" } },
+        { key: "service.environment", value: { stringValue: isProd ? "production" : "development" } },
+        { key: "dash0.dataset", value: { stringValue: dataset } }
       ]
     };
     
@@ -94,6 +98,8 @@
         url: window.location.href,
         userAgent: navigator.userAgent,
         referrer: document.referrer,
+        environment: isProd ? "production" : "development",
+        dataset: dataset,
         ...eventProperties
       }
     };
@@ -142,6 +148,9 @@
     if (authToken) {
       headers['Authorization'] = `Bearer ${authToken}`;
     }
+    
+    // Add dataset header for Dash0
+    headers['Dash0-Dataset'] = dataset;
     
     // Use fetch for the request
     fetch(telemetryEndpoint, {
@@ -205,9 +214,10 @@
   // Expose telemetry functions globally
   window.telemetry = {
     sendEvent: sendEvent,
-    flush: sendBatch  // Expose method to manually flush queue
+    flush: sendBatch,  // Expose method to manually flush queue
+    getDataset: () => dataset // Expose method to get current dataset
   };
   
   // Log that telemetry is initialized
-  console.debug('Telemetry initialized. Endpoint:', telemetryEndpoint);
+  console.debug(`Telemetry initialized. Endpoint: ${telemetryEndpoint}, Dataset: ${dataset}`);
 })(); 

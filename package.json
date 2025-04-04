@@ -13,9 +13,15 @@
     "telemetry:dev": "node scripts/telemetry.mjs 1",
     "telemetry:deploy": "node scripts/deploy-cf-worker.js && npm run telemetry:build",
     "telemetry:worker": "node scripts/deploy-cf-worker.js",
-    "telemetry:build": "node scripts/telemetry.mjs 4",
+    "telemetry:build": "hugo",
     "mcp": "node scripts/mcp.js",
-    "test:telemetry": "node scripts/test-telemetry.js"
+    "test:telemetry": "node scripts/test-telemetry.js",
+    "build": "hugo",
+    "test": "npx playwright test",
+    "test:debug": "npx playwright test --debug",
+    "watch": "hugo serve --disableFastRender",
+    "watch:telemetry": "node scripts/watch-telemetry.js",
+    "otlp:deploy": "node scripts/deploy-otlp-forwarder.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +39,7 @@
     "@playwright/test": "^1.51.1",
     "@types/node": "^22.14.0",
     "dotenv": "^16.4.7",
+    "node-fetch": "^3.3.2",
     "openai": "^4.91.1"
   },
   "dependencies": {

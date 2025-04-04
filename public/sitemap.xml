@@ -2,21 +2,21 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>https://chrisboyd.dev/</loc>
+    <loc>http://localhost:65083/</loc>
     <lastmod>2025-03-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://chrisboyd.dev/posts/</loc>
+    <loc>http://localhost:65083/posts/</loc>
     <lastmod>2025-03-03T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://chrisboyd.dev/contact/</loc>
+    <loc>http://localhost:65083/contact/</loc>
     <lastmod>2023-01-01T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://chrisboyd.dev/about/</loc>
+    <loc>http://localhost:65083/about/</loc>
   </url><url>
-    <loc>https://chrisboyd.dev/portfolio/</loc>
+    <loc>http://localhost:65083/portfolio/</loc>
   </url><url>
-    <loc>https://chrisboyd.dev/categories/</loc>
+    <loc>http://localhost:65083/categories/</loc>
   </url><url>
-    <loc>https://chrisboyd.dev/tags/</loc>
+    <loc>http://localhost:65083/tags/</loc>
   </url>
 </urlset>
