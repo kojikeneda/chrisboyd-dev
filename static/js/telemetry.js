@@ -5,8 +5,11 @@
   
   // Use different endpoints for dev and prod
   const telemetryEndpoint = isProd
-    ? 'https://chrisboyd-telemetry.dash0.workers.dev/collect' // Replace with your actual worker URL if different
-    : 'http://localhost:8080/collect'; // Local development endpoint
+    ? 'https://chrisboyd-otel-worker.chrisdboyd.workers.dev/v1/traces' // OpenTelemetry OTLP/HTTP endpoint
+    : 'http://localhost:24318/v1/traces'; // Local OTLP development endpoint
+  
+  // Authentication token - in production, this would be set securely
+  const authToken = isProd ? null : 'chrisboyd-dev-token-123';
   
   // Queue to batch events
   let eventQueue = [];
@@ -16,8 +19,73 @@
   const BATCH_TIMEOUT_MS = 3000;
   let batchTimer = null;
   
+  // Helper to format timestamp to OTLP format (nanoseconds)
+  function formatTimestamp(date) {
+    return {
+      seconds: Math.floor(date.getTime() / 1000),
+      nanos: (date.getTime() % 1000) * 1000000
+    };
+  }
+  
+  // Convert our simple events to OTLP format
+  function eventsToOTLP(events) {
+    const now = new Date();
+    const resource = {
+      attributes: [
+        { key: "service.name", value: { stringValue: "chrisboyd-blog" } },
+        { key: "service.version", value: { stringValue: "1.0.0" } },
+        { key: "telemetry.sdk.name", value: { stringValue: "custom-js" } },
+        { key: "telemetry.sdk.version", value: { stringValue: "1.0.0" } }
+      ]
+    };
+    
+    const scopeSpans = [{
+      scope: {
+        name: "chrisboyd-telemetry",
+        version: "1.0.0"
+      },
+      spans: events.map(event => {
+        const startTime = new Date(event.timestamp);
+        const endTime = new Date(startTime.getTime() + 1); // 1ms duration
+        
+        const attributes = [
+          { key: "event.name", value: { stringValue: event.eventName } },
+          { key: "event.type", value: { stringValue: event.eventType } }
+        ];
+        
+        // Add all properties as attributes
+        for (const [key, value] of Object.entries(event.properties || {})) {
+          if (value !== undefined && value !== null) {
+            attributes.push({
+              key: key,
+              value: { stringValue: String(value) }
+            });
+          }
+        }
+        
+        return {
+          traceId: crypto.randomUUID().replace(/-/g, ''),
+          spanId: crypto.randomUUID().replace(/-/g, '').substring(0, 16),
+          name: event.eventName,
+          kind: 1, // SPAN_KIND_INTERNAL
+          startTimeUnixNano: startTime.getTime() * 1000000,
+          endTimeUnixNano: endTime.getTime() * 1000000,
+          attributes: attributes,
+          status: { code: 1 } // STATUS_CODE_OK
+        };
+      })
+    }];
+    
+    return {
+      resourceSpans: [{
+        resource: resource,
+        scopeSpans: scopeSpans
+      }]
+    };
+  }
+  
   function sendEvent(name, eventProperties = {}) {
-    // Create event object in the format expected by the server
+    // Create event object
     const event = {
       eventType: name.split('_')[0] || 'custom', // e.g. 'page' from 'page_view'
       eventName: name,
@@ -62,34 +130,26 @@
     // Log for debugging
     console.debug('Telemetry: Sending batch of', events.length, 'events');
     
-    // Use sendBeacon if available for better performance and to avoid blocking page navigation
-    if (navigator.sendBeacon) {
-      try {
-        const blob = new Blob([JSON.stringify(events)], { type: 'application/json' });
-        const success = navigator.sendBeacon(telemetryEndpoint, blob);
-        if (!success) {
-          console.debug('Telemetry: sendBeacon failed, falling back to fetch');
-          sendWithFetch(events);
-        }
-      } catch (e) {
-        console.debug('Telemetry: sendBeacon error, falling back to fetch', e);
-        sendWithFetch(events);
-      }
-    } else {
-      sendWithFetch(events);
+    // Convert events to OTLP format
+    const otlpData = eventsToOTLP(events);
+    
+    // Headers for the request
+    const headers = {
+      'Content-Type': 'application/json',
+    };
+    
+    // Add authentication if available
+    if (authToken) {
+      headers['Authorization'] = `Bearer ${authToken}`;
     }
-  }
-  
-  function sendWithFetch(events) {
-    // Use fetch with proper CORS mode
+    
+    // Use fetch for the request
     fetch(telemetryEndpoint, {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(events),
+      headers: headers,
+      body: JSON.stringify(otlpData),
       keepalive: true,
+      mode: 'cors',
       credentials: 'omit' // Don't send cookies to avoid CORS issues
     }).then(response => {
       if (response.ok) {

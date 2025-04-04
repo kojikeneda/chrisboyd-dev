@@ -104,6 +104,65 @@ async function showMenu() {
 // Main function
 async function main() {
   try {
+    // Check for command line arguments
+    const args = process.argv.slice(2);
+    if (args.length > 0) {
+      const option = args[0];
+      
+      switch (option) {
+        case '1':
+          await startLocalDevelopment();
+          break;
+        
+        case '2':
+          await deployWorker();
+          break;
+        
+        case '3':
+          await updateWorkerUrl();
+          break;
+        
+        case '4':
+          await rebuildHugoSite();
+          break;
+        
+        case '5':
+          console.log('Running full deployment workflow...');
+          const deploySuccess = await deployWorker();
+          if (deploySuccess) {
+            // Default to kojikeneda if running in automated mode
+            if (args.length > 1) {
+              // Use the second argument as the username
+              try {
+                let content = fs.readFileSync(telemetryJsPath, 'utf8');
+                content = content.replace(
+                  /['"]https:\/\/chrisboyd-telemetry\..*?\.workers\.dev\/collect['"]/,
+                  `'https://chrisboyd-telemetry.${args[1]}.workers.dev/collect'`
+                );
+                fs.writeFileSync(telemetryJsPath, content);
+                console.log(`Updated telemetry.js with Cloudflare Worker URL: ${args[1]}`);
+                await rebuildHugoSite();
+              } catch (error) {
+                console.error(`Error updating telemetry.js: ${error.message}`);
+              }
+            } else {
+              const updateSuccess = await updateWorkerUrl();
+              if (updateSuccess) {
+                await rebuildHugoSite();
+              }
+            }
+          }
+          break;
+        
+        default:
+          console.log('Invalid option. Please provide a valid option (1-5).');
+      }
+      
+      rl.close();
+      return;
+    }
+    
+    // Interactive mode if no arguments provided
     let exit = false;
     
     while (!exit) {

@@ -2,46 +2,10 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
     <title>Tags on Chris Boyd&#39;s Blog</title>
-    <link>http://localhost:49753/tags/</link>
+    <link>https://chrisboyd.dev/tags/</link>
     <description>Recent content in Tags on Chris Boyd&#39;s Blog</description>
     <generator>Hugo -- 0.145.0</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 03 Mar 2025 00:00:00 +0000</lastBuildDate>
-    <atom:link href="http://localhost:49753/tags/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>Automation</title>
-      <link>http://localhost:49753/tags/automation/</link>
-      <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:49753/tags/automation/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Cloud</title>
-      <link>http://localhost:49753/tags/cloud/</link>
-      <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:49753/tags/cloud/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Infrastructure</title>
-      <link>http://localhost:49753/tags/infrastructure/</link>
-      <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:49753/tags/infrastructure/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>IT Management</title>
-      <link>http://localhost:49753/tags/it-management/</link>
-      <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:49753/tags/it-management/</guid>
-      <description></description>
-    </item>
-    <item>
-      <title>Observability</title>
-      <link>http://localhost:49753/tags/observability/</link>
-      <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:49753/tags/observability/</guid>
-      <description></description>
-    </item>
+    <atom:link href="https://chrisboyd.dev/tags/index.xml" rel="self" type="application/rss+xml" />
   </channel>
 </rss>

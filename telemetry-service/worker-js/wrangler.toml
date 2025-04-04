@@ -1,6 +1,15 @@
 name = "chrisboyd-telemetry"
 main = "index.js"
-compatibility_date = "2025-04-03"
+compatibility_date = "2023-04-04"
+compatibility_flags = ["nodejs_compat"]
+
+[build]
+command = "npm install"
+
+# Configure a custom domain for your worker (uncomment when ready)
+# [routes]
+# pattern = "chrisboyd-telemetry.kojikeneda.workers.dev/*"
+# zone_name = "kojikeneda.workers.dev"
 
 [vars]
 # These will be set in the Cloudflare dashboard

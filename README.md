@@ -74,7 +74,40 @@ You can also access all these commands through the Cursor Command Palette.
 
 ### OpenTelemetry Integration
 
-This project includes OpenTelemetry integration to track user interactions and site performance. The telemetry data is sent to Dash0 for analysis.
+The site integrates with [Dash0](https://dash0.com) for telemetry using OpenTelemetry. This allows tracking of page views, outbound link clicks, and custom events.
+
+### Local Development
+
+For local development, telemetry is sent to a local Go service that forwards it to Dash0. 
+
+When running `npm run dev:up`, the local telemetry service is automatically started.
+
+### Production
+
+For production, telemetry is sent to a Cloudflare Worker that forwards it to Dash0. 
+
+To deploy the Cloudflare Worker:
+
+1. Make sure you have a Dash0 account and API key
+2. Add your Dash0 API key to the `.env` file
+3. Run `npm run telemetry:deploy` to deploy the worker and rebuild the site
+
+### Telemetry Management Commands
+
+The following commands are available to manage telemetry:
+
+- `npm run telemetry` - Interactive menu for all telemetry operations
+- `npm run telemetry:dev` - Start local development with telemetry
+- `npm run telemetry:worker` - Deploy just the Cloudflare Worker (without rebuilding the site)
+- `npm run telemetry:deploy` - Deploy the Cloudflare Worker and rebuild the site
+- `npm run telemetry:build` - Rebuild the Hugo site after telemetry changes
+- `npm run telemetry:logs` - View telemetry logs in real-time
+
+### Common Issues
+
+- If you get a "Method not allowed" error, check that you're sending a POST request to the collect endpoint
+- If you get a CORS error, check that the worker is properly deployed and accessible
+- If telemetry is not showing up in Dash0, check that your API key is correct and that the worker is deployed
 
 ### Configuration
 
