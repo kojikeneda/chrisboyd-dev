@@ -1,31 +1,31 @@
 package main
 
 import (
-	"context"
 	"encoding/json"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
-	"os/signal"
-	"syscall"
-	"time"
+	"path/filepath"
+	"sync"
 
 	"chrisboyd.dev/telemetry/collector"
+	"github.com/joho/godotenv"
 	"go.opentelemetry.io/otel/attribute"
-	"go.opentelemetry.io/otel/trace"
 )
 
-// EventData represents telemetry data from the client
+// EventData represents the telemetry data from client
 type EventData struct {
-	Name       string            `json:"name"`
-	URL        string            `json:"url"`
-	UserAgent  string            `json:"userAgent"`
-	Referrer   string            `json:"referrer"`
-	Attributes map[string]string `json:"attributes,omitempty"`
+	EventType  string            `json:"eventType"`
+	EventName  string            `json:"eventName"`
+	Timestamp  string            `json:"timestamp"`
+	Properties map[string]string `json:"properties"`
 }
 
 func main() {
+	// Load environment variables from .env file at project root
+	loadEnvFile()
+
 	// Initialize OpenTelemetry
 	shutdown, err := collector.InitProvider()
 	if err != nil {
@@ -36,117 +36,125 @@ func main() {
 	// Get tracer
 	tracer := collector.GetTracer()
 
-	// Create a more robust CORS-enabled HTTP server
-	mux := http.NewServeMux()
+	// Configure HTTP server with CORS support
+	http.HandleFunc("/collect", func(w http.ResponseWriter, r *http.Request) {
+		// Enable CORS
+		enableCors(&w, r)
 
-	// Add the collect endpoint with CORS support
-	mux.HandleFunc("/collect", func(w http.ResponseWriter, r *http.Request) {
-		// Handle preflight OPTIONS request
+		// Handle preflight requests
 		if r.Method == "OPTIONS" {
-			enableCors(&w, r)
 			w.WriteHeader(http.StatusOK)
 			return
 		}
 
-		// Enable CORS for the actual request
-		enableCors(&w, r)
-
+		// Only accept POST requests
 		if r.Method != "POST" {
-			w.WriteHeader(http.StatusMethodNotAllowed)
+			http.Error(w, "Method not allowed", http.StatusMethodNotAllowed)
 			return
 		}
 
-		var eventData EventData
-		if err := json.NewDecoder(r.Body).Decode(&eventData); err != nil {
+		// Parse JSON payload
+		var events []EventData
+		if err := json.NewDecoder(r.Body).Decode(&events); err != nil {
+			log.Printf("Error parsing request body: %v", err)
 			http.Error(w, "Invalid request body", http.StatusBadRequest)
 			return
 		}
 
-		// Log the received data for debugging
-		fmt.Printf("Received telemetry event: %s from %s\n", eventData.Name, eventData.URL)
+		// Process each event concurrently
+		var wg sync.WaitGroup
+		for _, event := range events {
+			wg.Add(1)
+			go func(e EventData) {
+				defer wg.Done()
 
-		// Create a context with timeout
-		ctx, cancel := context.WithTimeout(context.Background(), 5*time.Second)
-		defer cancel()
+				// Create context and span for this event
+				_, span := tracer.Start(r.Context(), fmt.Sprintf("process_%s", e.EventType))
 
-		// Start a span for this telemetry event
-		ctx, span := tracer.Start(
-			ctx,
-			eventData.Name,
-			trace.WithAttributes(
-				attribute.String("url", eventData.URL),
-				attribute.String("userAgent", eventData.UserAgent),
-				attribute.String("referrer", eventData.Referrer),
-			),
-		)
+				// Add event attributes to span
+				for key, value := range e.Properties {
+					span.SetAttributes(attribute.String(key, value))
+				}
 
-		// Add custom attributes to span
-		for k, v := range eventData.Attributes {
-			span.SetAttributes(attribute.String(k, v))
+				// Log the event for debugging
+				log.Printf("Received telemetry event: %s/%s with %d properties",
+					e.EventType, e.EventName, len(e.Properties))
+
+				// End the span after processing
+				span.End()
+			}(event)
 		}
 
-		// End the span
-		span.End()
+		// Wait for all events to be processed
+		wg.Wait()
 
+		// Return success response
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprintf(w, `{"status":"ok"}`)
+		json.NewEncoder(w).Encode(map[string]string{
+			"status":  "success",
+			"message": fmt.Sprintf("Processed %d events", len(events)),
+		})
 	})
 
-	// Start server
+	// Determine port from environment or default to 8080
 	port := os.Getenv("PORT")
 	if port == "" {
 		port = "8080"
 	}
 
-	server := &http.Server{
-		Addr:    ":" + port,
-		Handler: mux,
-	}
-
-	// Handle graceful shutdown
-	go func() {
-		signals := make(chan os.Signal, 1)
-		signal.Notify(signals, syscall.SIGINT, syscall.SIGTERM)
-		<-signals
-
-		ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
-		defer cancel()
-
-		if err := server.Shutdown(ctx); err != nil {
-			log.Printf("HTTP server shutdown error: %v", err)
-		}
-	}()
-
+	// Start HTTP server
 	log.Printf("Telemetry service running on port %s", port)
-	if err := server.ListenAndServe(); err != http.ErrServerClosed {
-		log.Fatalf("HTTP server error: %v", err)
+	if err := http.ListenAndServe(":"+port, nil); err != nil {
+		log.Fatalf("Error starting server: %v", err)
 	}
 }
 
-// enableCors sets CORS headers for the response
+// Helper function to enable CORS
 func enableCors(w *http.ResponseWriter, r *http.Request) {
-	// Get the Origin header
+	// Get the origin header
 	origin := r.Header.Get("Origin")
 	if origin == "" {
-		// If no Origin header, allow all origins
-		origin = "*"
+		// If no origin header is present, use a safe default
+		origin = "http://localhost:1313"
 	}
 
-	// Set CORS headers
+	// Set CORS headers with specific origin instead of wildcard
 	(*w).Header().Set("Access-Control-Allow-Origin", origin)
 	(*w).Header().Set("Access-Control-Allow-Methods", "POST, GET, OPTIONS, PUT, DELETE")
+	(*w).Header().Set("Access-Control-Allow-Headers", "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+	(*w).Header().Set("Access-Control-Allow-Credentials", "true")
+}
 
-	// Allow all requested headers instead of being specific
-	// This follows the advice from the GitHub issue
-	requestedHeaders := r.Header.Get("Access-Control-Request-Headers")
-	if requestedHeaders != "" {
-		(*w).Header().Set("Access-Control-Allow-Headers", requestedHeaders)
+// loadEnvFile loads environment variables from .env file
+func loadEnvFile() {
+	// First try current directory
+	err := godotenv.Load()
+	if err != nil {
+		// If that fails, try going up one level (project root)
+		cwd, _ := os.Getwd()
+		parentDir := filepath.Dir(cwd)
+		envFile := filepath.Join(parentDir, ".env")
+
+		err = godotenv.Load(envFile)
+		if err != nil {
+			log.Printf("Warning: Could not load .env file, using system environment variables: %v", err)
+		} else {
+			log.Println("Loaded environment variables from parent directory:", envFile)
+		}
 	} else {
-		// Default set of headers if none requested
-		(*w).Header().Set("Access-Control-Allow-Headers",
-			"Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization")
+		log.Println("Loaded environment variables from current directory")
 	}
 
-	(*w).Header().Set("Access-Control-Allow-Credentials", "true")
-	(*w).Header().Set("Access-Control-Max-Age", "7200") // Cache preflight for 2 hours (same as in the GitHub issue)
+	// Print key environment variables for debugging (without values)
+	envVars := []string{"DASH0_API_KEY", "DASH0_DATASET", "OTEL_SERVICE_NAME", "OTEL_EXPORTER_OTLP_ENDPOINT"}
+	presentVars := make([]string, 0)
+
+	for _, v := range envVars {
+		if os.Getenv(v) != "" {
+			presentVars = append(presentVars, v)
+		}
+	}
+
+	log.Printf("Environment variables present: %v", presentVars)
 }

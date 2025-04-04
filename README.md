@@ -43,32 +43,74 @@ This script starts both:
 
 ### Idempotent Environment Commands
 
-We provide commands that always work regardless of the current state:
+The following NPM scripts are available to manage your development environment:
 
 ```bash
-# Start development environment (kills existing processes first)
+# Start the development environment (both Hugo and telemetry service)
+# This is a blocking command. Press Ctrl+C to stop.
 npm run dev:up
 
-# Stop development environment (ensures all processes are stopped)
+# Stop all development services (Hugo and telemetry service)
 npm run dev:down
 
-# Check status and logs of development environment
+# Check the status and logs of running services
 npm run dev:logs
 
-# Deploy to production (interactive, step-by-step process)
+# Deploy to production (interactive, will prompt for confirmation)
 npm run prod:deploy
+
+# Run a dry-run of production deployment to check prerequisites
+npm run prod:deploy -- --dry-run
 ```
 
-These commands ensure consistent behavior every time they're run.
+These commands are designed to be idempotent - they will produce the same result regardless of how many times you run them or what state the system is in:
+
+- `dev:up` will first shut down any existing services on ports 1313 and 8080 before starting a new instance
+- `dev:down` will ensure all development processes are properly terminated
+- `dev:logs` will show you the status of all services and their logs
+- `prod:deploy` will guide you through the deployment process with confirmations
+
+You can also access all these commands through the Cursor Command Palette.
 
 ### OpenTelemetry Integration
 
-The site uses OpenTelemetry to collect telemetry data and send it to Dash0:
+This project includes OpenTelemetry integration to track user interactions and site performance. The telemetry data is sent to Dash0 for analysis.
 
-1. **Client-side**: `static/js/telemetry.js` captures events and sends them to the telemetry endpoint
-2. **Cloudflare Worker**: `telemetry-service/worker-js/` contains a Cloudflare Worker that processes telemetry data
+### Configuration
 
-For local development, the telemetry endpoint is set to `http://localhost:8080/collect`. In production, it points to your deployed worker URL.
+To configure the telemetry service, set the following environment variables in the `.env` file:
+
+```
+# Dash0 Telemetry Configuration
+OTEL_EXPORTER_OTLP_ENDPOINT=ingress.us-west-2.aws.dash0.com:4317
+OTEL_SERVICE_NAME=chrisboyd-blog
+
+# Replace with your actual Dash0 API key
+DASH0_API_KEY=your-dash0-api-key
+DASH0_DATASET=default
+```
+
+For local development, the telemetry service runs on port 8080 and is started automatically by the `dev.sh` script.
+
+### Tracked Events
+
+The following events are tracked:
+- `page_view`: When a user visits any page
+- `outbound_link_click`: When a user clicks on an external link
+
+### Testing Telemetry
+
+To verify that the telemetry system is working properly:
+
+```bash
+npm run test:telemetry
+```
+
+This will run a full test cycle that verifies:
+1. Proper telemetry initialization
+2. Event sending without errors
+3. CORS configuration
+4. Dash0 connectivity
 
 ### Automated Telemetry Management
 
@@ -136,10 +178,38 @@ This will interactively:
 
 ## Testing
 
-The project includes Playwright tests with AI-assisted self-healing capabilities:
+### Telemetry Testing
+
+The project includes extensive tests for telemetry functionality to ensure that events are properly captured and sent without errors:
 
 ```bash
+# Run the full telemetry testing suite
+npm run test:telemetry
+```
+
+This command performs a complete test cycle:
+1. Stops any running development services
+2. Verifies all services are stopped
+3. Runs the Playwright tests with telemetry error checking
+4. Tests production deployment prerequisites
+5. Cleans up after testing
+
+The telemetry tests specifically check for:
+- Proper initialization of telemetry
+- Successful sending of page_view events
+- Successful sending of outbound_link_click events
+- Any errors in the console related to telemetry
+
+### General Testing
+
+For running all tests:
+
+```bash
+# Run all Playwright tests
 npx playwright test
+
+# Run with UI
+npx playwright test --ui
 ```
 
 ## Directory Structure
@@ -152,4 +222,52 @@ npx playwright test
 - `telemetry-service/worker-js/`: Cloudflare Worker for telemetry processing
 - `tests/`: Playwright tests with AI-assisted self-healing
 - `dev.sh`: Development environment script
-- `scripts/telemetry.mjs`: Interactive telemetry management script 
+- `scripts/telemetry.mjs`: Interactive telemetry management script
+
+## Custom MCP (Mechanical Copilot) Implementation
+
+This project includes a custom-built MCP implementation in `scripts/mcp.js` that provides simple command execution without external dependencies. All the commands in the `mcp.config.json` file are executed through this lightweight script.
+
+Benefits of our custom MCP implementation:
+- Zero external dependencies 
+- Simple JavaScript execution
+- Easy to understand and modify
+- Works with both simple commands and code blocks
+- Supports options like dry-run for deployment
+
+To see all available commands:
+```bash
+npm run mcp
+```
+
+### Command Summary
+
+| Command | Description | Options |
+|---------|-------------|---------|
+| `npm run dev:up` | Start development environment | None |
+| `npm run dev:down` | Stop development environment | None |
+| `npm run dev:logs` | Check status and logs | None |
+| `npm run prod:deploy` | Deploy to production | `--dry-run` |
+| `npm run telemetry` | Interactive telemetry management | None |
+| `npm run telemetry:dev` | Start local telemetry | None |
+| `npm run telemetry:deploy` | Deploy telemetry worker | None |
+| `npm run telemetry:build` | Rebuild Hugo site | None |
+
+## Idempotent Environment Commands
+
+The following NPM scripts are available to manage your development environment:
+
+```bash
+# Start the development environment (both Hugo and telemetry service)
+# This is a blocking command. Press Ctrl+C to stop.
+npm run dev:up
+
+# Stop all development services (Hugo and telemetry service)
+npm run dev:down
+
+# Check the status and logs of running services
+npm run dev:logs
+
+# Deploy to production (interactive, will prompt for confirmation)
+npm run prod:deploy
+```

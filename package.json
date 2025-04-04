@@ -4,15 +4,17 @@
   "main": "index.js",
   "scripts": {
     "dev": "./dev.sh",
-    "dev:up": "node scripts/mcp.js dev up",
-    "dev:down": "node scripts/mcp.js dev down",
-    "dev:logs": "node scripts/mcp.js dev logs",
-    "prod:deploy": "node scripts/mcp.js prod deploy",
-    "telemetry": "node scripts/telemetry.mjs",
-    "telemetry:dev": "./dev.sh",
-    "telemetry:deploy": "cd telemetry-service/worker-js && npx wrangler deploy",
-    "telemetry:build": "hugo",
-    "mcp": "node scripts/mcp.js"
+    "dev:up": "npx mcp dev up",
+    "dev:down": "npx mcp dev down",
+    "dev:logs": "npx mcp dev logs",
+    "telemetry:logs": "node scripts/watch-telemetry.js",
+    "prod:deploy": "npx mcp prod deploy",
+    "telemetry": "node scripts/telemetry-management.js",
+    "telemetry:dev": "node scripts/deploy-telemetry.js --local",
+    "telemetry:deploy": "node scripts/deploy-telemetry.js --deploy",
+    "telemetry:build": "node scripts/deploy-telemetry.js --build",
+    "mcp": "node scripts/mcp.js",
+    "test:telemetry": "node scripts/test-telemetry.js"
   },
   "repository": {
     "type": "git",

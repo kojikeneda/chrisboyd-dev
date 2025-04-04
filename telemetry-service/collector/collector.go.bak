@@ -35,7 +35,7 @@ func InitProvider() (func(), error) {
 	// If we have an API key, use it regardless of dash0Headers
 	if dash0ApiKey != "" {
 		// Updated: Dash0 expects the format "Authorization: <api_key>" (without Bearer)
-		headers["Authorization"] = fmt.Sprintf("Bearer %s", dash0ApiKey)
+		headers["Authorization"] = dash0ApiKey
 		headers["Dash0-Dataset"] = dash0Dataset
 		fmt.Printf("Using API key authentication with dataset: %s\n", dash0Dataset)
 	} else if dash0Headers != "" {

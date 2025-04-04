@@ -76,7 +76,7 @@ export default defineConfig({
 
   /* Run your local dev server before starting the tests */
   webServer: {
-    command: 'hugo server',
+    command: './dev.sh',
     url: 'http://localhost:1313',
     reuseExistingServer: true,
     stdout: 'pipe',

@@ -1,0 +1,5 @@
+{
+  "name": "Telemetry: Check Logs and Status",
+  "command": "npm run telemetry:logs",
+  "description": "View detailed telemetry service logs and connection status"
+} 

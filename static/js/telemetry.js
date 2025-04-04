@@ -5,40 +5,82 @@
   
   // Use different endpoints for dev and prod
   const telemetryEndpoint = isProd
-    ? 'https://chrisboyd-telemetry.your-username.workers.dev/collect' // Replace with your actual worker URL
+    ? 'https://chrisboyd-telemetry.dash0.workers.dev/collect' // Replace with your actual worker URL if different
     : 'http://localhost:8080/collect'; // Local development endpoint
   
-  function sendEvent(name, attributes = {}) {
-    const data = {
-      name: name,
-      url: window.location.href,
-      userAgent: navigator.userAgent,
-      referrer: document.referrer,
-      attributes: attributes
+  // Queue to batch events
+  let eventQueue = [];
+  
+  // Batch size and timer configuration
+  const MAX_BATCH_SIZE = 10;
+  const BATCH_TIMEOUT_MS = 3000;
+  let batchTimer = null;
+  
+  function sendEvent(name, eventProperties = {}) {
+    // Create event object in the format expected by the server
+    const event = {
+      eventType: name.split('_')[0] || 'custom', // e.g. 'page' from 'page_view'
+      eventName: name,
+      timestamp: new Date().toISOString(),
+      properties: {
+        url: window.location.href,
+        userAgent: navigator.userAgent,
+        referrer: document.referrer,
+        ...eventProperties
+      }
     };
     
     // Log the event to console for debugging
-    console.debug('Telemetry: Sending event', name, data);
+    console.debug('Telemetry: Queueing event', name, event);
+    
+    // Add to queue
+    eventQueue.push(event);
+    
+    // Send immediately if batch size reached
+    if (eventQueue.length >= MAX_BATCH_SIZE) {
+      sendBatch();
+    } else if (!batchTimer) {
+      // Start timer to send batch after timeout
+      batchTimer = setTimeout(sendBatch, BATCH_TIMEOUT_MS);
+    }
+  }
+  
+  function sendBatch() {
+    // Clear timer
+    if (batchTimer) {
+      clearTimeout(batchTimer);
+      batchTimer = null;
+    }
+    
+    // Skip if queue is empty
+    if (eventQueue.length === 0) return;
+    
+    // Get events to send
+    const events = [...eventQueue];
+    eventQueue = [];
+    
+    // Log for debugging
+    console.debug('Telemetry: Sending batch of', events.length, 'events');
     
     // Use sendBeacon if available for better performance and to avoid blocking page navigation
     if (navigator.sendBeacon) {
       try {
-        const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+        const blob = new Blob([JSON.stringify(events)], { type: 'application/json' });
         const success = navigator.sendBeacon(telemetryEndpoint, blob);
         if (!success) {
           console.debug('Telemetry: sendBeacon failed, falling back to fetch');
-          sendWithFetch(data);
+          sendWithFetch(events);
         }
       } catch (e) {
         console.debug('Telemetry: sendBeacon error, falling back to fetch', e);
-        sendWithFetch(data);
+        sendWithFetch(events);
       }
     } else {
-      sendWithFetch(data);
+      sendWithFetch(events);
     }
   }
   
-  function sendWithFetch(data) {
+  function sendWithFetch(events) {
     // Use fetch with proper CORS mode
     fetch(telemetryEndpoint, {
       method: 'POST',
@@ -46,9 +88,9 @@
         'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(events),
       keepalive: true,
-      credentials: 'omit' // Don't send cookies
+      credentials: 'omit' // Don't send cookies to avoid CORS issues
     }).then(response => {
       if (response.ok) {
         console.debug('Telemetry: Successfully sent data');
@@ -93,9 +135,17 @@
     }
   });
   
+  // Send any queued events before page unload
+  window.addEventListener('beforeunload', function() {
+    if (eventQueue.length > 0) {
+      sendBatch();
+    }
+  });
+  
   // Expose telemetry functions globally
   window.telemetry = {
-    sendEvent: sendEvent
+    sendEvent: sendEvent,
+    flush: sendBatch  // Expose method to manually flush queue
   };
   
   // Log that telemetry is initialized

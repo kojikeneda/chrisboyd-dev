@@ -32,7 +32,8 @@
     "dev": {
       "up": {
         "description": "Idempotent start of local development environment (kills existing processes first)",
-        "code": "const { exec, execSync } = require('child_process'); const fs = require('fs'); const path = require('path'); function isPortInUse(port) { try { execSync('lsof -i:' + port, { stdio: 'ignore' }); return true; } catch (e) { return false; } } console.log('Cleaning up existing processes...'); try { execSync('pkill -f \"hugo server\" || true', { stdio: 'ignore' }); } catch (e) {} try { execSync('pkill -f \"go run.*telemetry-service/main.go\" || true', { stdio: 'ignore' }); } catch (e) {} [8080, 1313].forEach(port => { if (isPortInUse(port)) { try { const pid = execSync('lsof -t -i:' + port).toString().trim(); console.log('Killing process on port ' + port + ' (PID: ' + pid + ')'); execSync('kill -9 ' + pid, { stdio: 'ignore' }); } catch (e) {} } }); setTimeout(() => { console.log('Starting local development environment...'); const child = exec('./dev.sh', { cwd: process.cwd() }); child.stdout.pipe(process.stdout); child.stderr.pipe(process.stderr); setTimeout(() => { if (isPortInUse(1313) && isPortInUse(8080)) { console.log('🟢 Local development environment is running!'); console.log('   Hugo: http://localhost:1313'); console.log('   Telemetry Service: http://localhost:8080'); } else { console.log('⚠️  Warning: Not all services appear to be running.'); console.log('   Run \"npm run dev:logs\" to check for errors.'); } }, 5000); }, 1000);"
+        "command": "./dev.sh",
+        "workingDirectory": "."
       },
       "down": {
         "description": "Idempotent shutdown of local development environment",
