@@ -1,7 +1,55 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.npm
+.env
+.env.*
+!.env.example
+
+# Rust
+/target/
+**/*.rs.bk
+Cargo.lock
+**/*.pdb
+**/*.wasm
+.cargo-ok
+
+# Cloudflare
+.wrangler/
+.dev.vars
+build/
+dist/
 
 # Playwright
-node_modules/
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# Hugo
+public/
+resources/
+.hugo_build.lock
+
+# Development/IDE files
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+*.swp
+*.swo
+*.log
+.cache/
+
+# Temporary files
+tmp/
+temp/
+
+# Database
+*.sqlite
+*.db
