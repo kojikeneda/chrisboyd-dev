@@ -5,7 +5,7 @@ Personal website for Chris Boyd, built with Hugo and deployed on Cloudflare Page
 ## Features
 
 - Static site generated with Hugo
-- OpenTelemetry integration with Dash0 via Cloudflare Workers
+- Self-hosted OpenTelemetry telemetry using Cloudflare Workers, D1 & R2
 - Self-healing Playwright tests with AI assistance
 - Automated workflows with MCP (Mechanical Copilot)
 - Idempotent development and deployment commands
@@ -16,7 +16,8 @@ Personal website for Chris Boyd, built with Hugo and deployed on Cloudflare Page
 
 - Node.js v14+ and npm
 - Hugo v0.80+
-- Go 1.18+ (if using the Go telemetry service)
+- Rust (for building the OpenTelemetry worker)
+- Cloudflare account (for D1 database and Workers)
 
 ### Setup
 
@@ -37,20 +38,18 @@ Personal website for Chris Boyd, built with Hugo and deployed on Cloudflare Page
    ```
    This will clean up any existing processes and start fresh.
 
-This script starts both:
-- Hugo server on http://localhost:1313
-- Go telemetry service on http://localhost:8080
+This script starts the Hugo server on http://localhost:1313
 
 ### Idempotent Environment Commands
 
 The following NPM scripts are available to manage your development environment:
 
 ```bash
-# Start the development environment (both Hugo and telemetry service)
+# Start the development environment
 # This is a blocking command. Press Ctrl+C to stop.
 npm run dev:up
 
-# Stop all development services (Hugo and telemetry service)
+# Stop all development services
 npm run dev:down
 
 # Check the status and logs of running services
@@ -65,7 +64,7 @@ npm run prod:deploy -- --dry-run
 
 These commands are designed to be idempotent - they will produce the same result regardless of how many times you run them or what state the system is in:
 
-- `dev:up` will first shut down any existing services on ports 1313 and 8080 before starting a new instance
+- `dev:up` will first shut down any existing services on port 1313 before starting a new instance
 - `dev:down` will ensure all development processes are properly terminated
 - `dev:logs` will show you the status of all services and their logs
 - `prod:deploy` will guide you through the deployment process with confirmations
@@ -74,56 +73,70 @@ You can also access all these commands through the Cursor Command Palette.
 
 ### OpenTelemetry Integration
 
-The site integrates with [Dash0](https://dash0.com) for telemetry using OpenTelemetry. This allows tracking of page views, outbound link clicks, and custom events.
+The site uses a self-hosted OpenTelemetry implementation built on Cloudflare technologies:
+
+- **Cloudflare Worker**: Processes telemetry data in OTLP format
+- **D1 Database**: Stores structured trace data with a proper schema
+- **R2 Storage**: Used for larger telemetry data and backups
+
+This allows tracking of page views, outbound link clicks, and custom events, all while maintaining full control over your data.
 
 ### Local Development
 
-For local development, telemetry is sent to a local Go service that forwards it to Dash0. 
+For local development, the OpenTelemetry worker can be run locally using Wrangler:
 
-When running `npm run dev:up`, the local telemetry service is automatically started.
+```bash
+cd otel-worker/otel-worker
+npx wrangler dev
+```
+
+This will start the worker on http://localhost:24318. The telemetry client is configured to automatically use this endpoint in development.
 
 ### Production
 
-For production, telemetry is sent to a Cloudflare Worker that forwards it to Dash0. 
+For production, telemetry is sent to the deployed Cloudflare Worker:
 
-To deploy the Cloudflare Worker:
+```
+https://chrisboyd-otel-worker.chrisdboyd.workers.dev
+```
 
-1. Make sure you have a Dash0 account and API key
-2. Add your Dash0 API key to the `.env` file
-3. Run `npm run telemetry:deploy` to deploy the worker and rebuild the site
+To deploy or update the worker:
+
+1. Make sure you have an AUTH_TOKEN in your `.env` file
+2. Run `npm run telemetry:deploy` to deploy the worker and rebuild the site
 
 ### Telemetry Management Commands
 
 The following commands are available to manage telemetry:
 
-- `npm run telemetry` - Interactive menu for all telemetry operations
-- `npm run telemetry:dev` - Start local development with telemetry
-- `npm run telemetry:worker` - Deploy just the Cloudflare Worker (without rebuilding the site)
-- `npm run telemetry:deploy` - Deploy the Cloudflare Worker and rebuild the site
+- `npm run telemetry:deploy` - Deploy the OpenTelemetry worker and rebuild the site
 - `npm run telemetry:build` - Rebuild the Hugo site after telemetry changes
-- `npm run telemetry:logs` - View telemetry logs in real-time
+- `npm run test:telemetry` - Test the telemetry system
 
-### Common Issues
+### Viewing Telemetry Data
 
-- If you get a "Method not allowed" error, check that you're sending a POST request to the collect endpoint
-- If you get a CORS error, check that the worker is properly deployed and accessible
-- If telemetry is not showing up in Dash0, check that your API key is correct and that the worker is deployed
+You can view telemetry data through several interfaces:
+
+1. **Traces API**: Visit `https://chrisboyd-otel-worker.chrisdboyd.workers.dev/traces` (requires authentication)
+2. **D1 Dashboard**: Access your D1 database in the Cloudflare dashboard
+3. **R2 Dashboard**: View stored telemetry data in the R2 bucket via Cloudflare dashboard
+
+### Cloudflare Resources
+
+This implementation uses the following Cloudflare resources:
+- **Worker**: `chrisboyd-otel-worker`
+- **D1 Database**: `chrisboyd-telemetry-db`
+- **R2 Bucket**: `chrisboyd-telemetry`
+- **Durable Objects**: Used for WebSocket state management
 
 ### Configuration
 
-To configure the telemetry service, set the following environment variables in the `.env` file:
+To configure the telemetry worker, set the following environment variable:
 
 ```
-# Dash0 Telemetry Configuration
-OTEL_EXPORTER_OTLP_ENDPOINT=ingress.us-west-2.aws.dash0.com:4317
-OTEL_SERVICE_NAME=chrisboyd-blog
-
-# Replace with your actual Dash0 API key
-DASH0_API_KEY=your-dash0-api-key
-DASH0_DATASET=default
+# Authentication token for the telemetry worker
+AUTH_TOKEN=your-secret-token
 ```
-
-For local development, the telemetry service runs on port 8080 and is started automatically by the `dev.sh` script.
 
 ### Tracked Events
 
@@ -143,7 +156,7 @@ This will run a full test cycle that verifies:
 1. Proper telemetry initialization
 2. Event sending without errors
 3. CORS configuration
-4. Dash0 connectivity
+4. OpenTelemetry worker connectivity
 
 ### Automated Telemetry Management
 
@@ -152,17 +165,11 @@ We use MCP (Mechanical Copilot) to automate telemetry workflows. You can access 
 #### Using npm scripts
 
 ```bash
-# Start local development
-npm run telemetry:dev
-
-# Deploy the Cloudflare Worker
+# Deploy the OpenTelemetry Worker
 npm run telemetry:deploy
 
 # Rebuild the Hugo site
 npm run telemetry:build
-
-# Interactive telemetry management
-npm run telemetry
 ```
 
 #### Using Cursor Commands
@@ -176,9 +183,7 @@ In Cursor, use Command Palette (Cmd+Shift+P) and search for:
 - `Prod: Deploy to Production`
 
 **Telemetry Commands**:
-- `Telemetry: Start Local Development`
 - `Telemetry: Deploy to Cloudflare`
-- `Telemetry: Interactive Management`
 - `Telemetry: Rebuild Hugo Site`
 
 #### Using MCP Commands
@@ -191,7 +196,6 @@ npx mcp dev logs   # Check logs and status
 npx mcp prod deploy # Deploy to production
 
 # Telemetry Commands
-npx mcp telemetry dev
 npx mcp telemetry deploy
 npx mcp telemetry rebuild
 ```
@@ -291,11 +295,11 @@ npm run mcp
 The following NPM scripts are available to manage your development environment:
 
 ```bash
-# Start the development environment (both Hugo and telemetry service)
+# Start the development environment
 # This is a blocking command. Press Ctrl+C to stop.
 npm run dev:up
 
-# Stop all development services (Hugo and telemetry service)
+# Stop all development services
 npm run dev:down
 
 # Check the status and logs of running services
