@@ -36,8 +36,8 @@ const handleRequest = async (request, env, ctx) => {
     return handleCors(request, new Response(null, { status: 204 }));
   }
   
-  // Only handle requests to the /collect endpoint
-  if (url.pathname === '/collect') {
+  // Handle requests to both /collect and /v1/traces endpoints
+  if (url.pathname === '/collect' || url.pathname === '/v1/traces') {
     if (request.method === 'POST') {
       try {
         // Parse the JSON request body - expect an array of events
@@ -48,7 +48,7 @@ const handleRequest = async (request, env, ctx) => {
         
         // Process array of events
         if (Array.isArray(events)) {
-          console.log(`Processing ${events.length} telemetry events`);
+          console.log(`Processing ${events.length} telemetry events from ${url.pathname}`);
           
           // Process each event
           for (const event of events) {
@@ -56,7 +56,7 @@ const handleRequest = async (request, env, ctx) => {
           }
         } else {
           // Handle single event object
-          console.log('Processing single telemetry event');
+          console.log(`Processing single telemetry event from ${url.pathname}`);
           processEvent(events, tracer);
         }
         
