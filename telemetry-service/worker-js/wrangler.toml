@@ -8,8 +8,8 @@ command = "npm install"
 
 # Configure a custom domain for your worker (uncomment when ready)
 # [routes]
-# pattern = "chrisboyd-telemetry.kojikeneda.workers.dev/*"
-# zone_name = "kojikeneda.workers.dev"
+# pattern = "chrisboyd-telemetry.chrisdboyd.workers.dev/*"
+# zone_name = "chrisdboyd.workers.dev"
 
 [vars]
 # These will be set in the Cloudflare dashboard

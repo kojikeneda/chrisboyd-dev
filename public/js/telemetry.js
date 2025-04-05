@@ -1,13 +1,13 @@
 // Simple telemetry client for Hugo site
-// Version: 1.0.4 - Fixed worker URL (2025-04-05)
+// Version: 1.0.5 - Fixed worker domain for production (2025-04-05)
 (function() {
   // Determine telemetry endpoint based on environment
   const isProd = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
   
   // Use different endpoints for dev and prod
   // IMPORTANT: Do not change this URL without thorough testing
-  const telemetryEndpoint = isProd 
-    ? 'https://chrisboyd-otel-worker.chrisdboyd.workers.dev/collect' // Correct production endpoint
+  const telemetryEndpoint = isProd
+    ? 'https://chrisboyd-telemetry.chrisdboyd.workers.dev/collect' // Correct production endpoint
     : 'http://localhost:8080/collect'; // Local development endpoint
   
   // Authentication token - in production, this would be set securely
