@@ -1,10 +1,11 @@
 // Simple telemetry client for Hugo site
-// Version: 1.0.1 - Updated endpoint
+// Version: 1.0.2 - Clean implementation
 (function() {
   // Determine telemetry endpoint based on environment
   const isProd = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
   
   // Use different endpoints for dev and prod
+  // IMPORTANT: Do not change this URL without thorough testing
   const telemetryEndpoint = isProd ? 'https://chrisboyd-telemetry.chrisdboyd.workers.dev/v1/traces' // OpenTelemetry OTLP/HTTP endpoint
     : 'http://localhost:24318/v1/traces'; // Local OTLP development endpoint
   
