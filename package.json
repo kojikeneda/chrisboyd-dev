@@ -16,12 +16,17 @@
     "telemetry:build": "hugo",
     "mcp": "node scripts/mcp.js",
     "test:telemetry": "node scripts/test-telemetry.js",
-    "build": "hugo",
+    "build": "npm run generate:favicons && hugo",
     "test": "npx playwright test",
     "test:debug": "npx playwright test --debug",
+    "test:errors": "npx playwright test -g \"catch all console errors including 404s for resources\"",
+    "test:coverage": "npx playwright test && cat test-results/coverage.txt",
     "watch": "hugo serve --disableFastRender",
     "watch:telemetry": "node scripts/watch-telemetry.js",
-    "otlp:deploy": "node scripts/deploy-otlp-forwarder.js"
+    "otlp:deploy": "node scripts/deploy-otlp-forwarder.js",
+    "generate:favicons": "node scripts/generate-favicons.js",
+    "validate": "npm run generate:favicons && npm run test:errors",
+    "prepare": "husky"
   },
   "repository": {
     "type": "git",
@@ -38,7 +43,9 @@
   "devDependencies": {
     "@playwright/test": "^1.51.1",
     "@types/node": "^22.14.0",
+    "canvas": "^2.11.2",
     "dotenv": "^16.4.7",
+    "husky": "^9.1.7",
     "node-fetch": "^3.3.2",
     "openai": "^4.91.1"
   },

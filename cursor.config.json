@@ -1,0 +1,24 @@
+{
+  "commands": {
+    "validate": {
+      "description": "Generate favicons and run validation tests to ensure no console errors",
+      "command": "npm run validate",
+      "shortcut": "cmd+shift+v"
+    },
+    "test": {
+      "description": "Run all tests",
+      "command": "npm test",
+      "shortcut": "cmd+shift+t"
+    },
+    "serve": {
+      "description": "Start the Hugo dev server",
+      "command": "npm run dev",
+      "shortcut": "cmd+shift+r"
+    },
+    "build": {
+      "description": "Build the site with favicons",
+      "command": "npm run build",
+      "shortcut": "cmd+shift+b"
+    }
+  }
+} 

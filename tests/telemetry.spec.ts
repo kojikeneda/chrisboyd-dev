@@ -5,6 +5,80 @@ test.describe('Telemetry Tests', () => {
   // Remove server initialization since we're now relying on webServer in playwright.config.ts
   // which will start dev.sh (including telemetry service)
 
+  test('catch all console errors including 404s for resources', async ({ page }) => {
+    // Arrays to collect console messages
+    const consoleErrors = [];
+    const failedResources = [];
+    const allRequests = [];
+
+    // Listen for console logs and errors
+    page.on('console', msg => {
+      if (msg.type() === 'error') {
+        consoleErrors.push({
+          text: msg.text(),
+          location: msg.location()
+        });
+      }
+    });
+
+    // Track all requests for debugging
+    page.on('request', request => {
+      allRequests.push({
+        url: request.url(),
+        resourceType: request.resourceType(),
+        method: request.method()
+      });
+    });
+
+    // Listen for all failed requests
+    page.on('requestfailed', request => {
+      failedResources.push({
+        url: request.url(),
+        status: request.failure().errorText,
+        resourceType: request.resourceType(),
+        method: request.method()
+      });
+    });
+
+    // Go to home page
+    await page.goto('/');
+    
+    // Wait for all resources to load
+    await page.waitForLoadState('networkidle');
+    
+    // Log all failed resources
+    if (failedResources.length > 0) {
+      console.log('Failed resources:', JSON.stringify(failedResources, null, 2));
+    } else {
+      console.log('✅ No failed resource requests detected');
+    }
+    
+    // Log all console errors
+    if (consoleErrors.length > 0) {
+      console.log('Console errors detected:', JSON.stringify(consoleErrors, null, 2));
+    } else {
+      console.log('✅ No console errors detected');
+    }
+    
+    // Filter for favicon 404s
+    const favicon404s = failedResources.filter(resource => 
+      resource.url.includes('favicon') && 
+      (resource.status.includes('404') || resource.status.includes('not found'))
+    );
+    
+    if (favicon404s.length > 0) {
+      console.log('Missing favicons detected:', JSON.stringify(favicon404s, null, 2));
+    } else {
+      console.log('✅ All favicon resources loaded correctly');
+    }
+    
+    // Assert no 404s for favicons
+    expect(favicon404s).toEqual([]);
+    
+    // Assert no console errors
+    expect(consoleErrors).toEqual([]);
+  });
+
   test('telemetry is properly initialized without errors', async ({ page }) => {
     // Arrays to collect console messages
     const consoleErrors = [];
