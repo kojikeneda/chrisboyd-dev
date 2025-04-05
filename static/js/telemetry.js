@@ -1,4 +1,5 @@
 // Simple telemetry client for Hugo site
+// Version: 1.0.1 - Updated endpoint
 (function() {
   // Determine telemetry endpoint based on environment
   const isProd = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
