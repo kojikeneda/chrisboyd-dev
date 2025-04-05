@@ -58,10 +58,10 @@ async function updateWorkerUrl() {
         // Read the telemetry.js file
         let content = fs.readFileSync(telemetryJsPath, 'utf8');
         
-        // Update the production URL
+        // Update the production URL with the correct endpoint format
         content = content.replace(
-          /['"]https:\/\/chrisboyd-telemetry\..*?\.workers\.dev\/collect['"]/,
-          `'https://chrisboyd-telemetry.${username}.workers.dev/collect'`
+          /['"]https:\/\/chrisboyd-telemetry\..*?\.workers\.dev\/v1\/traces['"]/,
+          `'https://chrisboyd-telemetry.${username}.workers.dev/v1/traces'`
         );
         
         // Write the updated content back
@@ -136,8 +136,8 @@ async function main() {
               try {
                 let content = fs.readFileSync(telemetryJsPath, 'utf8');
                 content = content.replace(
-                  /['"]https:\/\/chrisboyd-telemetry\..*?\.workers\.dev\/collect['"]/,
-                  `'https://chrisboyd-telemetry.${args[1]}.workers.dev/collect'`
+                  /['"]https:\/\/chrisboyd-telemetry\..*?\.workers\.dev\/v1\/traces['"]/,
+                  `'https://chrisboyd-telemetry.${args[1]}.workers.dev/v1/traces'`
                 );
                 fs.writeFileSync(telemetryJsPath, content);
                 console.log(`Updated telemetry.js with Cloudflare Worker URL: ${args[1]}`);
