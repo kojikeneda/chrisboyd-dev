@@ -14,9 +14,10 @@
     "telemetry:deploy": "node scripts/deploy-cf-worker.js && npm run telemetry:build",
     "telemetry:worker": "node scripts/deploy-cf-worker.js",
     "telemetry:build": "hugo",
+    "telemetry:bundle": "node scripts/bundle-telemetry.js",
     "mcp": "node scripts/mcp.js",
     "test:telemetry": "node scripts/test-telemetry.js",
-    "build": "npm run generate:favicons && hugo",
+    "build": "npm run generate:favicons && npm run telemetry:bundle && hugo",
     "test": "npx playwright test",
     "test:debug": "npx playwright test --debug",
     "test:errors": "npx playwright test -g \"catch all console errors including 404s for resources\"",
@@ -45,6 +46,7 @@
     "@types/node": "^22.14.0",
     "canvas": "^2.11.2",
     "dotenv": "^16.4.7",
+    "esbuild": "^0.25.2",
     "husky": "^9.1.7",
     "node-fetch": "^3.3.2",
     "openai": "^4.91.1"
@@ -52,6 +54,14 @@
   "dependencies": {
     "@microlabs/otel-cf-workers": "^1.0.0-rc.49",
     "@opentelemetry/api": "^1.9.0",
+    "@opentelemetry/exporter-trace-otlp-http": "^0.200.0",
+    "@opentelemetry/instrumentation": "^0.200.0",
+    "@opentelemetry/instrumentation-fetch": "^0.200.0",
+    "@opentelemetry/instrumentation-xml-http-request": "^0.200.0",
+    "@opentelemetry/resources": "^2.0.0",
+    "@opentelemetry/sdk-trace-base": "^2.0.0",
+    "@opentelemetry/sdk-trace-web": "^2.0.0",
+    "@opentelemetry/semantic-conventions": "^1.30.0",
     "playwright": "^1.51.1"
   }
 }
