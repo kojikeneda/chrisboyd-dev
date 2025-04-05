@@ -3,4 +3,4 @@
 	url = https://github.com/adityatelange/hugo-PaperMod.git
 [submodule "otel-worker"]
 	path = otel-worker
-	url = https://github.com/fiberplane/otel-worker.git
+	url = https://github.com/kojikeneda/otel-worker.git
