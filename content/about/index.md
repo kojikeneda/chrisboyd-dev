@@ -1,10 +1,14 @@
 # About Me
 
-<div style="text-align: center;">
-  <img src="/images/photo-037.jpg" alt="Chris Boyd" style="max-width: 200px; border-radius: 50%;">
+<div class="about-container" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 2rem; margin-bottom: 2rem;">
+  <div class="about-image" style="flex: 0 0 200px;">
+    <img src="/images/photo-037.jpg" alt="Chris Boyd" style="width: 100%; border-radius: 50%; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+  </div>
+  <div class="about-text" style="flex: 1; min-width: 300px;">
+    <p>I'm an engineering executive with a proven track record in turning clever ideas into scalable, production-grade systems. My experience spans SRE, product management, and full-stack engineering, having led teams at GoDaddy, Moogsoft, and Vultr. I've built robust observability frameworks that drive actionable insights while also architecting and operating backend microservices using technologies like Quarkus.</p>
+    <p>Notably, I led a critical migration from a legacy Java agent to a high-performance Rust-based solution, significantly enhancing performance and reducing system footprint. In essence, I combine hands-on technical expertise with strategic leadership to drive products from conception to large-scale operation.</p>
+  </div>
 </div>
-
-I’m an engineering executive with a proven track record in turning clever ideas into scalable, production-grade systems. My experience spans SRE, product management, and full-stack engineering, having led teams at GoDaddy, Moogsoft, and Vultr. I’ve built robust observability frameworks that drive actionable insights while also architecting and operating backend microservices using technologies like Quarkus. Notably, I led a critical migration from a legacy Java agent to a high-performance Rust-based solution, significantly enhancing performance and reducing system footprint. In essence, I combine hands-on technical expertise with strategic leadership to drive products from conception to large-scale operation.
 
 ## My Journey
 
@@ -12,10 +16,39 @@ Starting my career early career at IBM I learned the rigors of an FDA regulated 
 
 ## Philosophy & Vision
 
-For me, leadership means bridging the gap between high-level product strategy and hands-on technical execution. I believe the best outcomes are achieved by building engineering cultures centered around empowerment, measuring iterative change towards a clear goal, and by building inclusive and diverse teams. I'm data driven in my application of observability platforms, crafting efficient microservices, or mentoring teams to excel in fast-paced environments by focusing on impact and applying light weight processes. My guiding principle is simple: **“Do what you say you’re going to do, even when it’s inconvenient.”** which allows me to build trust within and amongst my teams. 
+For me, leadership means bridging the gap between high-level product strategy and hands-on technical execution. I believe the best outcomes are achieved by building engineering cultures centered around empowerment, measuring iterative change towards a clear goal, and by building inclusive and diverse teams. I'm data driven in my application of observability platforms, crafting efficient microservices, or mentoring teams to excel in fast-paced environments by focusing on impact and applying light weight processes. My guiding principle is simple: **"Do what you say you're going to do, even when it's inconvenient."** which allows me to build trust within and amongst my teams. 
 
-## Let’s Connect
+## Let's Connect
 
-I’m always eager to discuss cutting-edge technology, innovative cloud solutions, and engineering leadership. Feel free to reach out via [email](mailto:chrisboyd@gmail.com), check out my work on [GitHub](https://github.com/kojikeneda), or connect with me on [LinkedIn](https://www.linkedin.com/in/chris-boyd-365b2220/).
+<div class="connect-container" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem;">
+  <a href="mailto:chrisboyd@gmail.com" class="connect-button" style="display: inline-flex; align-items: center; padding: 0.5rem 1rem; background-color: #f5f5f5; border-radius: 4px; text-decoration: none; color: #333; transition: all 0.3s ease;" aria-label="Email">
+    <span style="margin-right: 0.5rem;">✉️</span> Email
+  </a>
+  <a href="https://github.com/kojikeneda" class="connect-button" style="display: inline-flex; align-items: center; padding: 0.5rem 1rem; background-color: #f5f5f5; border-radius: 4px; text-decoration: none; color: #333; transition: all 0.3s ease;" aria-label="GitHub">
+    <span style="margin-right: 0.5rem;">💻</span> GitHub
+  </a>
+  <a href="https://www.linkedin.com/in/chris-boyd-365b2220/" class="connect-button" style="display: inline-flex; align-items: center; padding: 0.5rem 1rem; background-color: #f5f5f5; border-radius: 4px; text-decoration: none; color: #333; transition: all 0.3s ease;" aria-label="LinkedIn">
+    <span style="margin-right: 0.5rem;">🔗</span> LinkedIn
+  </a>
+</div>
+
+<style>
+  .connect-button:hover {
+    background-color: #e0e0e0;
+    transform: translateY(-2px);
+  }
+  
+  @media (max-width: 768px) {
+    .about-container {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    
+    .about-image {
+      margin-bottom: 1.5rem;
+    }
+  }
+</style>
 
 © 2025 Chris Boyd's Blog · Powered by Hugo & PaperMod
