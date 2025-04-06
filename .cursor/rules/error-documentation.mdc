@@ -1,0 +1,110 @@
+---
+description: Document major failure points in this project and they were solved.  To be filled by AI.
+globs: "**/*.{js,ts,jsx,tsx,go,html,md}"
+---
+
+# ChrisBoyd.dev Error Documentation
+
+This file documents known issues, errors, and their resolutions for the ChrisBoyd.dev website project.
+
+## Telemetry System Errors
+
+### Error: Incorrect Worker URL in Telemetry Script
+- **Error**: `POST https://chrisboyd-telemetry.dash0.workers.dev/collect net::ERR_NAME_NOT_RESOLVED`
+- **Cause**: The telemetry.js script was using an incorrect domain for the Cloudflare Worker.
+- **Solution**: 
+  1. Updated the worker URL in telemetry.js to use the correct domain:
+     ```javascript
+     const telemetryEndpoint = isProd
+       ? 'https://chrisboyd-telemetry.chrisdboyd.workers.dev/collect' 
+       : 'http://localhost:8080/collect';
+     ```
+  2. Added version and timestamp parameters to force cache invalidation:
+     ```html
+     <script src="{{ "js/telemetry.js" | relURL }}?v=1.0.5&t=20250405"></script>
+     ```
+
+### Error: Cloudflare Worker Deployment Failure
+- **Error**: `New version of script does not export class 'WebSocketHibernationServer' which is depended on by existing Durable Objects.`
+- **Cause**: Previously deployed version used different Durable Object structures.
+- **Solution**: 
+  1. Created migrations.toml file with deleted classes:
+     ```toml
+     [[migrations]]
+     tag = "v1"
+     new_classes = []
+     deleted_classes = ["WebSocketHibernationServer"]
+     ```
+  2. Reverted to original worker name to maintain compatibility.
+
+### Error: Cached Telemetry Script Issues
+- **Error**: Updates to telemetry.js were not reflected in the browser.
+- **Cause**: Aggressive caching by Cloudflare or browsers.
+- **Solution**:
+  1. Added cache control headers in _headers file:
+     ```
+     /js/telemetry.js
+       Cache-Control: no-cache, no-store, must-revalidate
+       Pragma: no-cache
+       Expires: 0
+     ```
+  2. Used unique version parameters for each deployment.
+  3. Force-pushed an empty commit to trigger Cloudflare Pages deployment.
+
+### Error: OpenTelemetry Bundling Failures
+- **Error**: `Could not resolve "@opentelemetry/sdk-trace-base"`
+- **Cause**: Missing dependencies in package.json.
+- **Solution**: 
+  1. Added missing OpenTelemetry dependencies:
+     ```
+     npm install --save @opentelemetry/sdk-trace-base @opentelemetry/instrumentation
+     ```
+  2. Updated imports in src/telemetry/index.js to use proper module exports.
+
+### Error: Worker addSpanProcessor Missing
+- **Error**: `TypeError: E.addSpanProcessor is not a function`
+- **Cause**: API changes in OpenTelemetry v2.0.0.
+- **Solution**: 
+  1. Updated provider instantiation to use constructor-based processor registration:
+     ```javascript
+     const provider = new WebTracerProvider({
+       resource,
+       // In v2, processors are added in the constructor
+       spanProcessors: [spanProcessor]
+     });
+     ```
+
+## Hugo Site Errors
+
+### Error: Hugo Version Compatibility
+- **Error**: `=> hugo v0.125.7 or greater is required for hugo-PaperMod to build`
+- **Cause**: PaperMod theme requires minimum Hugo version.
+- **Solution**: Upgraded Hugo to v0.145.0.
+
+## Development Environment Errors
+
+### Error: Local Development Server Conflicts
+- **Error**: Port already in use when starting development server.
+- **Cause**: Previous server instances not properly terminated.
+- **Solution**: 
+  1. Created dev.sh script to kill existing processes before startup:
+     ```bash
+     pkill -f "hugo server" || true
+     pkill -f "go run.*telemetry-service/main.go" || true
+     ```
+  2. Added npm scripts for proper process management.
+
+## Test Environment Errors
+
+### Error: Failed Resources in Tests
+- **Error**: `Failed resources: [{ "url": "http://localhost:8787/collect", "status": "net::ERR_CONNECTION_REFUSED", "resourceType": "xhr", "method": "POST" }]`
+- **Cause**: Incorrect local development port in telemetry script.
+- **Solution**: Updated local endpoint port from 8787 to 8080 to match actual Go service.
+
+## Best Practices
+
+1. Always check the worker URL in both development and production environments.
+2. Use version and timestamp parameters to ensure cache invalidation.
+3. Test telemetry script with actual endpoints before deployment.
+4. Implement proper error handling in telemetry script to prevent user experience degradation.
+5. Keep dependencies up to date, especially when using rapidly evolving frameworks like OpenTelemetry.

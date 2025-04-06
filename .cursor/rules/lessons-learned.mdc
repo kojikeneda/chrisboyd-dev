@@ -1,0 +1,115 @@
+---
+description: captures important patterns, preferences, and project intelligence, living document that grows smarter as progress happens
+globs: "**/*.{js,ts,jsx,tsx,go,html,md}"
+---
+
+# ChrisBoyd.dev Lessons Learned
+
+This document captures important patterns, preferences, and project intelligence for the ChrisBoyd.dev blog project.
+
+## Architectural Patterns
+
+### Static Site + Serverless Architecture
+- Hugo provides excellent performance and simplicity for a blog site
+- Cloudflare Pages offers seamless deployment and CDN capabilities
+- Serverless Workers are ideal for lightweight telemetry processing
+- This architecture provides a good balance of performance, maintainability, and cost efficiency
+
+### Separation of Concerns
+- Content (Hugo markdown files) is clearly separated from presentation (theme)
+- Telemetry logic is isolated in dedicated files
+- Worker logic is maintained in a separate codebase
+- This separation makes maintenance simpler and components independently testable
+
+## Development Workflow
+
+### Effective Local Development
+- Use `npm run dev` for local development with live reloading
+- Local development includes both Hugo server and telemetry service
+- Environment detection in telemetry script automatically switches endpoints
+- Tests run in a controlled environment with Playwright
+
+### Deployment Strategy
+- Automated deployment through Cloudflare Pages
+- Worker deployment handled separately from site deployment
+- Force cache invalidation with version parameters
+- Empty commits can be used to trigger rebuilds when needed
+
+## Telemetry Implementation
+
+### Lightweight Client-Side Approach
+- Custom telemetry script is more lightweight than full analytics libraries
+- Batch processing reduces network requests
+- Use of idle callbacks minimizes impact on page performance
+- Error handling prevents telemetry issues from affecting user experience
+
+### OpenTelemetry Integration
+- OpenTelemetry provides a standardized format for observability data
+- Dash0 integration works best with OTLP format
+- Direct integration is preferred over CDN-loaded dependencies
+- Local bundling of dependencies improves reliability
+
+## Testing Strategies
+
+### Automated Testing
+- Playwright tests catch console errors and failed resource requests
+- Test scripts ensure telemetry is working correctly
+- CI pipeline includes test execution
+
+### Manual Verification
+- Check browser console for errors after deployment
+- Verify data flow through the entire pipeline
+- Test on multiple devices and browsers
+
+## Cache Management
+
+### Effective Cache Control
+- Use explicit cache control headers for dynamic resources
+- Version parameters force browser cache invalidation
+- CDN cache purge may be needed for major changes
+- Balance between performance and freshness
+
+## Project Structure
+
+### Organized Documentation
+- Architecture documentation provides system overview
+- Technical specifications detail implementation choices
+- Task planning tracks progress and upcoming work
+- Error documentation captures issues and solutions
+
+### Code Organization
+- Separate folders for different aspects of the project (static, layouts, content)
+- Worker code isolated in dedicated directory
+- Configuration clearly separated from implementation
+
+## Version Control Practices
+
+### Commit Hygiene
+- Clear, descriptive commit messages
+- Use `--no-verify` only when necessary (e.g., to bypass hooks for emergency fixes)
+- Group related changes in single commits
+- Maintain a clean commit history
+
+## Performance Considerations
+
+### Optimizing for Speed
+- Minimal JavaScript enhances page load performance
+- Asynchronous loading of non-critical resources
+- Telemetry operations don't block the main thread
+- Cache headers optimize repeat visits
+
+## Security Best Practices
+
+### Data Protection
+- No personal identifiable information in telemetry
+- HTTPS for all communications
+- API keys stored in environment variables, never in code
+- Proper CORS configuration for the worker
+
+## Future Improvements
+
+### Potential Enhancements
+- Consider implementing Web Vitals monitoring
+- Explore PWA capabilities for offline reading
+- Add structured data for better SEO
+- Consider A/B testing capabilities for content optimization
