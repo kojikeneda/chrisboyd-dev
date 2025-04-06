@@ -8,3 +8,8 @@
   Cache-Control: no-cache, no-store, must-revalidate
   Pragma: no-cache
   Expires: 0 
+
+# Cache control for static assets
+/js/telemetry.js
+  Cache-Control: no-cache, no-store, must-revalidate
+  Pragma: no-cache 
