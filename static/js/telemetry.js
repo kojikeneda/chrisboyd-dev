@@ -1,5 +1,5 @@
 // Simple telemetry client for Hugo site
-// Version: 1.0.5 - Fixed worker domain for production (2025-04-05)
+// Version: 1.0.6 - Updated worker domain for production (2025-04-06)
 (function() {
   // Determine telemetry endpoint based on environment
   const isProd = window.location.hostname !== 'localhost' && window.location.hostname !== '127.0.0.1';
