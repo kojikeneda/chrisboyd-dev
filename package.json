@@ -22,6 +22,7 @@
     "test:debug": "npx playwright test --debug",
     "test:errors": "npx playwright test -g \"catch all console errors including 404s for resources\"",
     "test:coverage": "npx playwright test && cat test-results/coverage.txt",
+    "post-change": "./scripts/post-change-tests.sh",
     "watch": "hugo serve --disableFastRender",
     "watch:telemetry": "node scripts/watch-telemetry.js",
     "otlp:deploy": "node scripts/deploy-otlp-forwarder.js",

@@ -101,6 +101,28 @@ This file documents known issues, errors, and their resolutions for the ChrisBoy
 - **Cause**: Incorrect local development port in telemetry script.
 - **Solution**: Updated local endpoint port from 8787 to 8080 to match actual Go service.
 
+## Testing Errors
+
+### Misleading Test Failures
+* **Error**: Tests fail with general errors that don't clearly indicate the root cause
+* **Resolution**: Enhanced test assertions with specific error messages and better logging
+* **Prevention**: Always check the test logs for details before assuming which component is failing
+
+### Intermittent Test Failures
+* **Error**: Tests sometimes pass and sometimes fail without code changes
+* **Resolution**: Added longer timeouts for network-dependent tests
+* **Prevention**: Use explicit timeouts for all network operations
+
+### Cached Resources Causing Test Issues
+* **Error**: Cached telemetry scripts or resources causing inconsistent test results
+* **Resolution**: Implemented proper cache control headers and cache-busting version parameters
+* **Prevention**: Always run post-change tests to verify cache behavior
+
+### Multiple Server Instances
+* **Error**: Tests fail because multiple instances of Hugo or telemetry servers are running
+* **Resolution**: Added automatic server cleanup to the post-change test script
+* **Prevention**: Use `npm run post-change` which properly handles server cleanup
+
 ## Best Practices
 
 1. Always check the worker URL in both development and production environments.

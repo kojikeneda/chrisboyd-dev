@@ -29,6 +29,12 @@ This document captures important patterns, preferences, and project intelligence
 - Environment detection in telemetry script automatically switches endpoints
 - Tests run in a controlled environment with Playwright
 
+### Post-Change Testing
+- Always run `npm run post-change` after completing a significant change
+- This ensures all automated tests pass before moving on to the next task
+- Tests will automatically shut down any running servers before executing
+- Pay attention to specific error messages in test failures for quicker debugging
+
 ### Deployment Strategy
 - Automated deployment through Cloudflare Pages
 - Worker deployment handled separately from site deployment
